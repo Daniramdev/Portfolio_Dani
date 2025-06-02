@@ -56,7 +56,7 @@ const HeroSection = () => {
       }}
     >
       {/* Konten Utama */}
-      <div ref={ref} className="relative z-10 ml-60">
+      <div ref={ref} className="relative z-10 ml-52">
         {/* Panah Animasi - Tampil hanya saat belum scroll */}
         {!showButton && (
           <motion.div
