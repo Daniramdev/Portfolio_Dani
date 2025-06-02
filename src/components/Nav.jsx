@@ -73,7 +73,7 @@ export const Nav = () => {
 
       {/* Mobile Sidebar / Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-72 shadow-lg transform transition-transform duration-300 ease-in-out z-40 ${
+        className={`fixed top-0 right-0 h-full w-72 shadow-lg transform transition-transform duration-300 ease-in-out z-40  ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -111,7 +111,7 @@ export const Nav = () => {
           </MagneticButton>
 
           {/* Footer with Social Media Icons */}
-          <div className="mt-auto pt-8 border-t border-white/20">
+          <div className=" pt-8 border-t border-white/20 mt-40">
             <p className="text-sm text-white/70 mb-4">Follow Me</p>
             <div className="flex items-center justify-start gap-3 grid grid-cols-4 ">
               <MagneticButton onClick={() => setIsMenuOpen(false)}>
