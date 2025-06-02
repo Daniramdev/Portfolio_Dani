@@ -1,0 +1,144 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+@import "tailwindcss"; /* ← Harus di paling atas jika pakai Tailwind v4 */
+
+/* Atur font global */
+body,
+html {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Kelas custom opsional */
+.font-body {
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.smooth-transform {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.opacity-fade {
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+.opacity-fade.show {
+  opacity: 1;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(0) rotateX(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%) rotateX(20deg);
+    opacity: 0;
+    filter: blur(2px);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transform-style: preserve-3d;
+}
+
+
+
+/* { Logo animasi} */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 60s linear infinite;
+}
+
+
+/* Efek teks berjalan tanpa akhir text*/
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.moving-text-wrapper {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+.moving-text-track {
+  display: inline-block;
+  padding-right: 100%; /* Untuk membuat duplikat teks tetap dalam satu baris */
+  will-change: transform;
+  animation: scroll 20s linear infinite;
+}
+
+.moving-text-track:hover {
+  animation-play-state: paused;
+}
+
+/* Agar bisa dihover */
+.moving-text-item {
+  display: inline-block;
+}
+
+
+/* animasi gambar bergerak */
+
+/* Efek scrolling dari kiri ke kanan */
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Efek scrolling dari kanan ke kiri */
+@keyframes scroll-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Wrapper untuk animasi kiri ke kanan */
+.moving-images-left {
+  display: flex;
+  width: fit-content;
+  animation: scroll-left 30s linear infinite;
+}
+
+.moving-images-left:hover {
+  animation-play-state: paused;
+}
+
+/* Wrapper untuk animasi kanan ke kiri */
+.moving-images-right {
+  display: flex;
+  width: fit-content;
+  animation: scroll-right 25s linear infinite;
+}
+
+.moving-images-right:hover {
+  animation-play-state: paused;
+}
