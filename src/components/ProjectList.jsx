@@ -111,7 +111,7 @@ const ProjectList = () => {
   };
 
   const renderOfficialProjects = () => (
-    <div id="project" className="grid grid-cols-1 gap-9">
+    <div id="project" className="grid grid-cols-1 gap-9 ">
       {officialProjects.map((project) => (
         <div
           key={project.id}
@@ -164,7 +164,7 @@ const ProjectList = () => {
   );
 
   const renderExperimentalProjects = () => (
-    <div className="grid grid-cols-1 gap-9">
+    <div className="grid grid-cols-1 gap-9 ">
       {experimentalProjects.map((project) => (
         <div
           key={project.id}
@@ -298,7 +298,7 @@ const ProjectList = () => {
   };
 
   return (
-    <div id="projects" className="bg-gray-900 text-white py-16 md:py-6 shadow-md relative">
+    <div id="projects" className="bg-gray-900 text-white py-16 md:py-6 shadow-md relative md:px-40">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Navigation Tabs - Left Aligned */}
         <nav className="flex mb-12 bg-gray-800 p-1 rounded-xl md:w-[54vh] w-[54.7vh] justify-start">
