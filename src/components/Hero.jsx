@@ -85,7 +85,7 @@ const HeroSection = () => {
 
         {/* Nama */}
         <motion.h1
-          className="text-xl font-bold md:mt-[8rem] mt-32 text-black text-opacity-80 px-6"
+          className="text-xl font-bold md:mt-[8rem] mt-32 text-black text-opacity-80 ml-6 "
           variants={slideUp}
           custom={1}
           initial="initial"
@@ -97,7 +97,7 @@ const HeroSection = () => {
         {/* Tombol Hire Me */}
         <MagneticButton>
           <motion.div
-            className="w-full h-10 text-xl flex items-center font-bold justify-center "
+            className="w-full h-10 text-xl flex items-center font-bold justify-center ml-6 "
             variants={slideUp}
             custom={2}
             initial="initial"
