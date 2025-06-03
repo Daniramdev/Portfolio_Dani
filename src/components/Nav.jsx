@@ -79,7 +79,7 @@ export const Nav = () => {
       >
         <div className="absolute inset-0 bg-gray-900 backdrop-blur-md border-r border-white/20"></div>
 
-        <div className="relative p-6  flex flex-col gap-8 text-white text-8xl mt-40 ">
+        <div className="relative p-6  flex flex-col gap-8 text-white text-8xl mt-32 ">
           <MagneticButton>
             <a href="#about" className="hover:text-blue-400 transition-colors duration-300"> 
               About
