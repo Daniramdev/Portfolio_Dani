@@ -21,7 +21,7 @@ export const opacity = {
 
 const AboutMe = () => {
   const introduction =
-    "Full-Stack Developer berpengalaman 2+ tahun dengan spesialisasi dalam pengembangan aplikasi web yang aman, responsif, dan skalabel. Menguasai teknologi modern termasuk Python dan PHP, dengan fokus pada solusi berbasis data dan performa tinggi. Terbukti mampu meningkatkan efisiensi sistem hingga 90% melalui pengembangan yang terukur dan implementasi keamanan yang ketat.";
+    "Full-Stack Developer with 2+ years of experience specializing in developing secure, responsive, and scalable web applications. Proficient in modern technologies including Python and PHP, with a focus on data-driven and high-performance solutions. Proven to improve system efficiency by up to 90% through scalable development and stringent security practices.";
 
   const skills = [
     "Frontend: HTML5, CSS3, JavaScript, Tailwind CSS",
