@@ -111,7 +111,7 @@ export const Nav = () => {
           </MagneticButton>
 
           {/* Footer with Social Media Icons */}
-          <div className=" pt-8 border-t border-white/20 mt-40">
+          <div className=" pt-8 border-t border-white/20 mt-28">
             <p className="text-sm text-white/70 mb-4">Follow Me</p>
             <div className="flex items-center justify-start gap-3 grid grid-cols-4 ">
               <MagneticButton onClick={() => setIsMenuOpen(false)}>
