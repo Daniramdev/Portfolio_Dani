@@ -1,7 +1,7 @@
 import React from 'react';
 
 function MovingText() {
-  const text = "- Dani Ramdani - Freelance Web Developer - Dani Ramdani - Freelance Web Developer ";
+  const text = "- Dani Ramdani - Fullstack Web Developer - Dani Ramdani - Fullstack Web Developer ";
 
   return (
     <div className="flex justify-center items-center h-40 bg-gray-900 shadow-lg overflow-hidden">
