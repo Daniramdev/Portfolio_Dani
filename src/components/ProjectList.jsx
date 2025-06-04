@@ -301,7 +301,7 @@ const ProjectList = () => {
     <div id="projects" className="bg-gray-900 text-white py-16 md:py-6 shadow-md relative md:px-40">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Navigation Tabs - Left Aligned */}
-        <nav className="flex mb-12 bg-gray-800 p-1 rounded-xl justify-start w-[290px] md:w-[330px]">
+        <nav className="flex mb-12 bg-gray-800 p-1 rounded-xl justify-start w-[330px] md:w-[330px]">
           <button
             className={`px-6 py-3 rounded-lg font-semibold transition-all text-center ${
               activeTab === "official" ? "bg-blue-600 text-white shadow-lg" : "text-gray-400 hover:text-white"
