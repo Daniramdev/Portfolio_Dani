@@ -56,11 +56,11 @@ const HeroSection = () => {
       }}
     >
       {/* Konten Utama */}
-      <div ref={ref} className="relative z-10 ml-50">
+      <div ref={ref} className="relative z-10 ml-48 md:ml-60">
         {/* Panah Animasi - Tampil hanya saat belum scroll */}
         {!showButton && (
           <motion.div
-            className="h-10 w-10 flex items-center justify-center mb-4 ml-20 "
+            className="h-10 w-10 flex items-center justify-center mb-4 ml-20 md:ml-40 "
             variants={slideUp}
             custom={0}
             initial="initial"
@@ -85,7 +85,7 @@ const HeroSection = () => {
 
         {/* Nama */}
         <motion.h1
-          className="text-xl font-bold md:mt-[8rem] mt-32 text-black text-opacity-80 ml-3 "
+          className="text-xl py-3 font-bold md:mt-[8rem] mt-32 text-black text-opacity-80 ml-3 md:ml-40 "
           variants={slideUp}
           custom={1}
           initial="initial"
@@ -97,7 +97,7 @@ const HeroSection = () => {
         {/* Tombol Hire Me */}
         <MagneticButton>
           <motion.div
-            className="w-full h-10 text-xl flex items-center font-bold justify-center ml-3 "
+            className="w-full h-10 text-xl flex items-center font-bold justify-center ml-3 md:ml-20 "
             variants={slideUp}
             custom={2}
             initial="initial"
