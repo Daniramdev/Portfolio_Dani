@@ -94,7 +94,7 @@ export const Nav = () => {
           <MagneticButton>
             <a
               href="#about"
-              className="text-2xl hover:text-blue-400 transition-colors duration-300"
+              className="text-3xl hover:text-blue-400 transition-colors duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
               About
@@ -104,7 +104,7 @@ export const Nav = () => {
           <MagneticButton>
             <a
               href="#project"
-              className="text-2xl hover:text-blue-400 transition-colors duration-300"
+              className="text-3xl hover:text-blue-400 transition-colors duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
               Project
@@ -114,7 +114,7 @@ export const Nav = () => {
           <MagneticButton>
             <a
               href="#contact"
-              className="text-2xl hover:text-blue-400 transition-colors duration-300"
+              className="text-3xl hover:text-blue-400 transition-colors duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
               Contact
@@ -122,7 +122,7 @@ export const Nav = () => {
           </MagneticButton>
 
           {/* Footer with Social Media Icons */}
-          <div className="pt-8 border-t border-white/20 mt-20">
+          <div className="pt-8 border-t border-white/20 mt-24">
             <p className="text-sm text-white/70 mb-4">Follow Me</p>
             <div className="flex items-center grid grid-cols-4">
               <MagneticButton onClick={() => setIsMenuOpen(false)}>
