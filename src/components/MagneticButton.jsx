@@ -8,7 +8,14 @@ const MagneticButton = ({ children }) => {
     const x = clientX - rect.left - rect.width / 2;
     const y = clientY - rect.top - rect.height / 2;
 
-    buttonRef.current.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+    // Tingkatkan sensitivitas dengan menaikkan angka multiplier
+    buttonRef.current.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px) scale(1.05)`;
+    buttonRef.current.style.transition = "transform 0.1s ease-out";
+  };
+
+  const resetTransform = () => {
+    buttonRef.current.style.transform = `translate(0px, 0px) scale(1)`;
+    buttonRef.current.style.transition = "transform 0.2s ease-in-out";
   };
 
   const handleMouseMove = (e) => {
@@ -16,7 +23,7 @@ const MagneticButton = ({ children }) => {
   };
 
   const handleMouseLeave = () => {
-    buttonRef.current.style.transform = `translate(0, 0)`;
+    resetTransform();
   };
 
   const handleTouchMove = (e) => {
@@ -27,7 +34,7 @@ const MagneticButton = ({ children }) => {
   };
 
   const handleTouchEnd = () => {
-    buttonRef.current.style.transform = `translate(0, 0)`;
+    resetTransform();
   };
 
   return (
@@ -35,10 +42,10 @@ const MagneticButton = ({ children }) => {
       ref={buttonRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onTouchStart={handleTouchMove} // Mulai deteksi sentuhan
+      onTouchStart={handleTouchMove}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="p-3 md:text-black text-3xl md:text-lg font-semibold transition-transform duration-300 ease-out cursor-pointer"
+      className="p-3 md:text-black text-3xl md:text-lg font-semibold duration-300 cursor-pointer will-change-transform"
     >
       {children}
     </div>
