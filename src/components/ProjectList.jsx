@@ -12,25 +12,35 @@ const ProjectList = () => {
 
   // Official Projects
   const officialProjects = [
-   
+      {
+    id: 1,
+    name: "Toko Alat Kopi",
+    year: 2024,
+    image: "/images/cofee.png", // Gambar dari situs kamu
+    description:
+      "Membangun landing page toko online alat kopi premium dengan desain modern dan responsif. Fitur mencakup produk grid, testimoni pelanggan, keranjang belanja sederhana, form login/register, dan checkout modal. Semua dibangun dengan HTML, CSS murni, dan JavaScript tanpa framework eksternal.",
+    actionUrl: "https://daniramdev.github.io/tokoalatkopi/ ",
+    githubUrl: "https://daniramdev.github.io/tokoalatkopi/ ", // Sesuaikan jika ada repo GitHub
+  },
     {
-      id: 1,
+      id: 2,
       name: "PT.INTI",
       year: 2020,
       image: "/images/ptinti1.jpg",
       description:"Sebagai Fullstak web developer membuat system website monitoring kontrak properti dengan tampilan responsive dengan sytem RBAC (role-basend access) memakai LDAP, Membuat crude di table dan vitur filtering data, membuat pemberitahuan mengirim/ menerima pesan berupa notif ke email semisal jika kontrak belum bayar,sudah bayar,jatuh tempo, Menu utama dashbord, properti management, kontrack management, usermanagemnt, tools yang saya gunakan framework CI, style tailwind css, java scripts dan database mysql ",
-      githubUrl: "https://github.com/Daniramdev/PT_INTI.git",
+      githubUrl: "",
     },
+    
     {
-      id: 2,
+      id: 3,
       name: "PT.PLN(iconnect)",
       year: 2023,
       image: "/images/pln.jpg",
       description:"Sebagai fullstak web developer membuat system management data tampilan serponsive modern meyesuaikan mode dekstop dan moble, dengan sytem RBAC (role-basend access) password pakai hassing. saya Membuat 26 diagram dengan total rata2 menu utama asset, retail, presale dan management data meyedianakan fitur export/import file folmat excel.csv, filtering data,seach berdasarkan nama,tanggal dll, dan membuat system crude, didalam management data untuk pengelolaan data, tools yg saya gunakan framework flask, style tailwindcss, java script buat diagram dll, database mysql,dengan demikian dapat memudahkan pengelolaan data/monitoring data dengan efesien dan akurat.",
-      githubUrl: "https://github.com/Daniramdev/PT_PLN.git",
+      githubUrl: "",
     },
+ 
    
-    
   ];
 
   // Experimental Projects
