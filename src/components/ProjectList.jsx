@@ -18,7 +18,7 @@ const ProjectList = () => {
     year: 2024,
     image: "/images/cofee.png", // Gambar dari situs kamu
     description:
-      "Membangun landing page toko online alat kopi premium dengan desain modern dan responsif. Fitur mencakup produk grid, testimoni pelanggan, keranjang belanja sederhana, form login/register, dan checkout modal. Semua dibangun dengan HTML, CSS murni, dan JavaScript tanpa framework eksternal.",
+      "Membangun landing page toko online alat kopi premium dengan desain modern dan responsif. Fitur mencakup produk grid, testimoni pelanggan, keranjang belanja sederhana, form login/register, dan checkout modal. Semua dibangun dengan HTML, CSS murni, dan JavaScript",
     actionUrl: "https://daniramdev.github.io/tokoalatkopi/ ",
     githubUrl: "https://daniramdev.github.io/tokoalatkopi/ ", // Sesuaikan jika ada repo GitHub
   },
