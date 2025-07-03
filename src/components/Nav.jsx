@@ -25,7 +25,7 @@ export const Nav = () => {
           </MagneticButton>
 
           <MagneticButton>
-            <a href="#project" className="hover:text-gray-600 transition-colors duration-300">
+            <a href="#projects" className="hover:text-gray-600 transition-colors duration-300">
               Project
             </a>
           </MagneticButton>

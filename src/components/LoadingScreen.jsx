@@ -9,16 +9,18 @@ export default function LoadingScreen({ onComplete }) {
     // Trigger slideIn
     container.classList.add("animate-slideIn");
 
-    // Setelah slideIn selesai, trigger slideUp
+    // After slideIn completes, trigger slideUp
     const timer = setTimeout(() => {
       container.classList.remove("animate-slideIn");
       container.classList.add("animate-slideUp");
 
-      // Panggil callback setelah slideUp selesai
+      // Call callback after slideUp completes
       setTimeout(() => {
-        onComplete();
-      }, 800); // sesuaikan dengan durasi animasi slideUp
-    }, 2000); // delay sebelum mulai slideUp
+        if (typeof onComplete === 'function') {
+          onComplete();
+        }
+      }, 800); // Match this with slideUp animation duration
+    }, 2000); // Delay before starting slideUp
 
     return () => clearTimeout(timer);
   }, [onComplete]);

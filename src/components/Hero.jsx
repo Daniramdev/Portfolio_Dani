@@ -1,149 +1,257 @@
 import React, { useRef, useState, useEffect } from "react";
-import { motion,useInView } from "framer-motion";
+import { motion, useInView, useTransform, useScroll } from "framer-motion";
 import MagneticButton from "./MagneticButton";
 import RoundedButton from "./RoundedButton";
-import LogoAnimation from "./LogoAnimation";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
 
 const HeroSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false });
   const [showButton, setShowButton] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const yPos = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
-  // Toggle tombol back-to-top
+  // 3D blob colors
+  const colors = ["#6366f1", "#8b5cf6", "#ec4899"];
+  const [currentColor, setCurrentColor] = useState(colors[0]);
+
   useEffect(() => {
     const handleScroll = () => {
       setShowButton(window.scrollY > 300);
     };
 
+    const colorInterval = setInterval(() => {
+      setCurrentColor(colors[Math.floor(Math.random() * colors.length)]);
+    }, 3000);
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearInterval(colorInterval);
+    };
   }, []);
 
-  // Scroll ke atas
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  // Scroll ke contact
   const scrollToContact = () => {
     const contactSection = document.getElementById("contact");
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: "smooth" });
-    } else {
-      alert("Section 'contact' not found!");
-    }
+    contactSection?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // Variants untuk animasi slide-up
   const slideUp = {
     initial: { y: "100%", opacity: 0 },
     animate: (i) => ({
       y: "0%",
       opacity: 1,
-      transition: { duration: 0.4, delay: 0.2 * i },
+      transition: { duration: 0.5, delay: 0.15 * i, ease: [0.16, 1, 0.3, 1] },
     }),
-    closed: { y: "50%", opacity: 0, transition: { duration: 0.4 } },
+  };
+
+  const floatingAnimation = {
+    animate: {
+      y: ["0%", "-10%", "0%"],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut",
+      },
+    },
   };
 
   return (
     <section
-      className="hero relative bg-center -mt-[86px] z-20 h-screen w-full flex  justify-center items-center text-center"
+      className="hero relative -mt-[80px] z-20 h-screen w-full flex justify-center items-center overflow-hidden"
       style={{
-        backgroundImage: "url('/bg.png')",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-        backgroundSize:"30rem"
+        background: "linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%)",
       }}
     >
-      {/* Konten Utama */}
-      <div ref={ref} className="relative z-10 ml-48 md:ml-60">
-        {/* Panah Animasi - Tampil hanya saat belum scroll */}
-        {!showButton && (
-          <motion.div
-            className="h-10 w-10 flex items-center justify-center mb-4 ml-20 md:ml-40 "
-            variants={slideUp}
-            custom={0}
-            initial="initial"
-            animate={isInView ? "animate" : "initial"}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 mt-60 md:mt-[16rem] text-black drop-shadow-md rotate-[-42deg]"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 14l-7 7m0 0l-7-7m7 7V3"
-              />
-            </svg>
-          </motion.div>
-        )}
+      {/* 3D Background Blob */}
+      <div className="absolute inset-0 w-full h-full pointer-events-none">
+        <Canvas>
+          <OrbitControls enableZoom={false} />
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[-2, 5, 2]} intensity={1} />
+          <Sphere args={[2, 64, 64]}>
+            <MeshDistortMaterial
+              color={currentColor}
+              attach="material"
+              distort={0.5}
+              speed={2}
+            />
+          </Sphere>
+        </Canvas>
+      </div>
 
-        {/* Nama */}
-        <motion.h1
-          className="text-xl py-3 font-bold md:mt-[8rem] mt-32 text-black text-opacity-80 ml-3 md:ml-40 "
+      {/* Floating Particles */}
+      {[...Array(15)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute rounded-full bg-indigo-500/20"
+          style={{
+            width: Math.random() * 10 + 5 + "px",
+            height: Math.random() * 10 + 5 + "px",
+            left: Math.random() * 100 + "%",
+            top: Math.random() * 100 + "%",
+          }}
+          animate={{
+            y: [0, (Math.random() - 0.5) * 100],
+            x: [0, (Math.random() - 0.5) * 100],
+            opacity: [0.2, 0.8, 0.2],
+          }}
+          transition={{
+            duration: Math.random() * 10 + 10,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
+      ))}
+
+      {/* Content */}
+      <motion.div
+        ref={ref}
+        className="relative z-10 w-full max-w-6xl px-8 flex flex-col items-center"
+        style={{ y: yPos }}
+      >
+        {/* Animated Title */}
+        <motion.div
+          className="relative overflow-hidden"
+          initial="initial"
+          animate={isInView ? "animate" : "initial"}
+        >
+          <motion.h1
+            className="text-5xl md:text-7xl font-bold text-gray-900 mb-6"
+            variants={{
+              initial: { y: "100%" },
+              animate: { y: 0 },
+            }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <span className="block">Dani Ramdani</span>
+          </motion.h1>
+          <motion.div
+            className="absolute bottom-0 left-0 w-full h-1 bg-indigo-500"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ delay: 0.8, duration: 0.8 }}
+          />
+        </motion.div>
+
+        {/* Subtitle */}
+        <motion.p
+          className="text-xl md:text-2xl text-gray-600 max-w-2xl mb-12"
           variants={slideUp}
           custom={1}
           initial="initial"
           animate={isInView ? "animate" : "initial"}
         >
-          I'm Dani Ramdani
-        </motion.h1>
+          Fullstack Developer & Designer crafting immersive digital experiences
+        </motion.p>
 
-        {/* Tombol Hire Me */}
-        <MagneticButton>
-          <motion.div
-            className="w-full h-10 text-xl flex items-center font-bold justify-center ml-3 md:ml-20 "
-            variants={slideUp}
-            custom={2}
-            initial="initial"
-            animate={isInView ? "animate" : "initial"}
-          >
+        {/* CTA Button */}
+        <motion.div
+          variants={slideUp}
+          custom={2}
+          initial="initial"
+          animate={isInView ? "animate" : "initial"}
+        >
+          <MagneticButton>
             <RoundedButton onClick={scrollToContact}>
-              Hire Me Now
+              <span className="relative z-10">Hire Me Now</span>
+              <motion.span
+                className="absolute inset-0 bg-indigo-600 rounded-full"
+                animate={{
+                  scale: [1, 1.2, 1],
+                  opacity: [0.8, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                }}
+              />
             </RoundedButton>
-          </motion.div>
-        </MagneticButton>
-      </div>
+          </MagneticButton>
+        </motion.div>
 
-      {/* Logo Animation di pojok kanan bawah */}
-      <div className="absolute bottom-10 right-10 md:right-20 md:bottom-20">
-        <LogoAnimation />
-      </div>
+        {/* Scroll Indicator */}
+        {!showButton && (
+          <motion.div
+            className="absolute bottom-10 flex flex-col items-center"
+            variants={floatingAnimation}
+            animate="animate"
+          >
+            <span className="text-sm mb-2 text-gray-500">Scroll down</span>
+            <motion.div
+              animate={{
+                y: [0, 10, 0],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+              }}
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 10L12 15L17 10"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </motion.div>
+          </motion.div>
+        )}
+      </motion.div>
 
       {/* Back to Top Button */}
       {showButton && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20 }}
           className="fixed bottom-6 right-6 z-40"
         >
           <MagneticButton>
             <button
               onClick={scrollToTop}
               aria-label="Back to top"
-              className="bg-gray-800 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg transition-all duration-300"
+              className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
+                width="24"
+                height="24"
                 viewBox="0 0 24 24"
-                stroke="currentColor"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
+                  d="M18 15L12 9L6 15"
+                  stroke="currentColor"
+                  strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 10l7-7m0 0l7 7m-7-7v18"
                 />
               </svg>
+              <motion.span
+                className="absolute inset-0 bg-white opacity-10"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [0, 0.1, 0],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                }}
+              />
             </button>
           </MagneticButton>
         </motion.div>
