@@ -57,7 +57,7 @@ const HeroSection = () => {
       {/* ✅ Background GIF */}
 <div className="absolute inset-0 w-full h-full mt-10 z-0 item-center justify-center flex pointer-events-none">
   <img
-    src="bg3.png"
+    src="bg.png"
     alt="Hero Background"
     className=" h-auto"
   />
