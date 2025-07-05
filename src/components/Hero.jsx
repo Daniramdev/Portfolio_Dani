@@ -74,7 +74,7 @@ const HeroSection = () => {
           playsInline
           className="w-full h-full"
         >
-          <source src="/vidio.mp4" type="video/mp4" />
+          <source src="/vidio_c.mp4" type="video/mp4" />
           {/* Fallback image if video doesn't load */}
           <img src="/fallback-hero.jpg" alt="Hero Background" className="w-full h-full object-cover" />
         </video>
