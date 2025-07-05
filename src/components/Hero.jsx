@@ -5,6 +5,7 @@ import RoundedButton from "./RoundedButton";
 
 const HeroSection = () => {
   const ref = useRef(null);
+  const videoRef = useRef(null);
   const isInView = useInView(ref, { once: false });
   const [showButton, setShowButton] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -19,6 +20,17 @@ const HeroSection = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    // Ensure video plays correctly on mobile devices
+    if (videoRef.current) {
+      videoRef.current.defaultMuted = true;
+      videoRef.current.muted = true;
+      videoRef.current.loop = true;
+      videoRef.current.playsInline = true;
+      videoRef.current.play().catch(e => console.log("Video play error:", e));
+    }
   }, []);
 
   const scrollToTop = () => {
@@ -51,23 +63,27 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="hero bg-red-50 relative -mt-[80px] z-20 h-screen w-full flex justify-center items-center overflow-hidden font-sans">
-      {/* Background Image */}
-     <div className="absolute inset-0 w-full h-full mt-10 z-0 flex items-center justify-center pointer-events-none">
-  <video 
-    autoPlay 
-    loop 
-    muted 
-    playsInline
-    className="w-full h-80"
-  >
-    <source src="vidio_c.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-</div>
+    <section className="hero bg-yellow-50 relative -mt-[80px] z-20 h-screen w-full flex justify-center items-center overflow-hidden font-sans">
+      {/* Video Background */}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden">
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full"
+        >
+          <source src="/vidio.mp4" type="video/mp4" />
+          {/* Fallback image if video doesn't load */}
+          <img src="/fallback-hero.jpg" alt="Hero Background" className="w-full h-full object-cover" />
+        </video>
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/20"></div>
+      </div>
 
-      {/* Floating Particles */}
-      {[...Array(15)].map((_, i) => (
+      {/* Floating Particles - Reduced to 10 for better performance */}
+      {[...Array(10)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute rounded-full bg-indigo-500/20 z-10"
@@ -90,7 +106,7 @@ const HeroSection = () => {
         />
       ))}
 
-      {/* Content */}
+      {/* Rest of your content remains the same */}
       <motion.div
         ref={ref}
         className="relative z-20 w-full max-w-6xl px-8 flex flex-col items-center"
@@ -103,7 +119,7 @@ const HeroSection = () => {
           animate={isInView ? "animate" : "initial"}
         >
           <motion.h1
-            className="text-5xl md:text-7xl font-bold text-gray-900 mb-2 text-center"
+            className="text-5xl md:text-7xl font-bold text-white mb-2 text-center drop-shadow-lg"
             variants={{
               initial: { y: "100%" },
               animate: { y: 0 },
@@ -122,7 +138,7 @@ const HeroSection = () => {
 
         {/* Subtitle */}
         <motion.p
-          className="text-xl md:text-2xl text-gray-800 text-center max-w-2xl py-2 mb-12"
+          className="text-xl md:text-2xl text-white/90 text-center max-w-2xl py-2 mb-12 drop-shadow-md"
           variants={slideUp}
           custom={1}
           initial="initial"
@@ -163,7 +179,7 @@ const HeroSection = () => {
             variants={floatingAnimation}
             animate="animate"
           >
-            <span className="text-sm mb-2 text-gray-500/70">Scroll down</span>
+            <span className="text-sm mb-2 text-white/70 drop-shadow-md">Scroll down</span>
             <motion.div
               animate={{
                 y: [0, 10, 0],
@@ -205,7 +221,7 @@ const HeroSection = () => {
             <button
               onClick={scrollToTop}
               aria-label="Back to top"
-              className="bg-gradient-to-br from-indigo-500 to-purple-600 text-gray-900 p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+              className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
             >
               <svg
                 width="24"
