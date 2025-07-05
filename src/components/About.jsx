@@ -114,8 +114,8 @@ const AboutMe = () => {
   animate={isInView ? "open" : "closed"}
 >
 
-<video
-  src="vidio_c.mp4"
+<img
+  src="/3d.png"
   autoPlay
   loop
   muted
