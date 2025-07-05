@@ -2,8 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView, useTransform, useScroll } from "framer-motion";
 import MagneticButton from "./MagneticButton";
 import RoundedButton from "./RoundedButton";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Sphere, MeshDistortMaterial } from "@react-three/drei";
 
 const HeroSection = () => {
   const ref = useRef(null);
@@ -12,23 +10,14 @@ const HeroSection = () => {
   const { scrollYProgress } = useScroll();
   const yPos = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
-  // 3D blob colors
-  const colors = ["#6366f1", "#8b5cf6", "#ec4899"];
-  const [currentColor, setCurrentColor] = useState(colors[0]);
-
   useEffect(() => {
     const handleScroll = () => {
       setShowButton(window.scrollY > 300);
     };
 
-    const colorInterval = setInterval(() => {
-      setCurrentColor(colors[Math.floor(Math.random() * colors.length)]);
-    }, 3000);
-
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      clearInterval(colorInterval);
     };
   }, []);
 
@@ -63,33 +52,22 @@ const HeroSection = () => {
 
   return (
     <section
-      className="hero relative -mt-[80px] z-20 h-screen w-full flex justify-center items-center overflow-hidden"
-      style={{
-        background: "linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%)",
-      }}
+      className="hero relative -mt-[80px] z-20 h-screen w-full flex justify-center items-center overflow-hidden font-sans"
     >
-      {/* 3D Background Blob */}
-      <div className="absolute inset-0 w-full h-full pointer-events-none">
-        <Canvas>
-          <OrbitControls enableZoom={false} />
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[-2, 5, 2]} intensity={1} />
-          <Sphere args={[2, 64, 64]}>
-            <MeshDistortMaterial
-              color={currentColor}
-              attach="material"
-              distort={0.5}
-              speed={2}
-            />
-          </Sphere>
-        </Canvas>
+      {/* ✅ Background GIF */}
+      <div className="absolute inset-0 w-full item-center justify-center flex h-full overflow-hidden z-0 pointer-events-none mt-16">
+        <img
+          src="/hero-videoo.gif"
+          alt="Hero Background Animation"
+          className="h-[90%] "
+        />
       </div>
 
       {/* Floating Particles */}
       {[...Array(15)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full bg-indigo-500/20"
+          className="absolute rounded-full bg-indigo-500/20 z-10"
           style={{
             width: Math.random() * 10 + 5 + "px",
             height: Math.random() * 10 + 5 + "px",
@@ -112,17 +90,17 @@ const HeroSection = () => {
       {/* Content */}
       <motion.div
         ref={ref}
-        className="relative z-10 w-full max-w-6xl px-8 flex flex-col items-center"
+        className="relative z-20 w-full max-w-6xl px-8 flex flex-col items-center"
         style={{ y: yPos }}
       >
-        {/* Animated Title */}
+        {/* Title */}
         <motion.div
           className="relative overflow-hidden"
           initial="initial"
           animate={isInView ? "animate" : "initial"}
         >
           <motion.h1
-            className="text-5xl md:text-7xl font-bold text-gray-900 mb-6"
+            className="text-5xl md:text-7xl font-bold text-gray-900 mb-2 text-center"
             variants={{
               initial: { y: "100%" },
               animate: { y: 0 },
@@ -141,7 +119,7 @@ const HeroSection = () => {
 
         {/* Subtitle */}
         <motion.p
-          className="text-xl md:text-2xl text-gray-600 max-w-2xl mb-12"
+          className="text-xl md:text-2xl text-gray-900 text-center max-w-2xl py-2 mb-12"
           variants={slideUp}
           custom={1}
           initial="initial"
@@ -161,7 +139,7 @@ const HeroSection = () => {
             <RoundedButton onClick={scrollToContact}>
               <span className="relative z-10">Hire Me Now</span>
               <motion.span
-                className="absolute inset-0 bg-indigo-600 rounded-full"
+                className="absolute inset-0 bg-indigo-600 py-2 rounded-full"
                 animate={{
                   scale: [1, 1.2, 1],
                   opacity: [0.8, 0],
@@ -178,11 +156,11 @@ const HeroSection = () => {
         {/* Scroll Indicator */}
         {!showButton && (
           <motion.div
-            className="absolute bottom-10 flex flex-col items-center"
+            className="absolute bottom-10 flex flex-col items-center py-2"
             variants={floatingAnimation}
             animate="animate"
           >
-            <span className="text-sm mb-2 text-gray-500">Scroll down</span>
+            <span className="text-sm mb-2 text-gray-500/70">Scroll down</span>
             <motion.div
               animate={{
                 y: [0, 10, 0],
@@ -218,13 +196,13 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
-          className="fixed bottom-6 right-6 z-40"
+          className="fixed bottom-6 right-6 z-40 "
         >
           <MagneticButton>
             <button
               onClick={scrollToTop}
               aria-label="Back to top"
-              className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
+              className="bg-gradient-to-br from-indigo-500 to-purple-600 text-gray-900 p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden"
             >
               <svg
                 width="24"
