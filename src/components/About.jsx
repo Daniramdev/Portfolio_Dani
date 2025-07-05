@@ -1,223 +1,552 @@
-import React, { useRef } from "react";
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
+import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import Tilt from "react-parallax-tilt";
+import { FaPython, FaReact, FaPhp, FaLaravel, FaArrowUp } from "react-icons/fa";
+import { SiFlask, SiCodeigniter, SiTailwindcss, SiMysql, SiPostgresql } from "react-icons/si";
 
-// Animation Variants
-export const slideUp = {
-  initial: { y: "100%", opacity: 0 },
-  open: (i) => ({
-    y: "0%",
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      delay: 0.05 * i,
-      ease: [0.4, 0, 0.2, 1],
-      type: "spring",
-      stiffness: 100,
-    },
-  }),
-  closed: {
-    y: "100%",
-    opacity: 0,
-    transition: {
-      duration: 0.6,
-      ease: [0.4, 0, 0.2, 1],
-    },
-  },
-};
+// Add your profile image import (replace with your actual image path)
+import ProfileImage from "/bg.png";
 
-export const opacity = {
-  initial: { opacity: 0, y: 20 },
-  open: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 1,
-      ease: [0.4, 0, 0.2, 1],
-      type: "spring",
-      stiffness: 80,
-    },
-  },
-  closed: {
-    opacity: 0,
-    y: 20,
-    transition: {
-      duration: 0.8,
-      ease: [0.4, 0, 0.2, 1],
-    },
-  },
-};
+const AboutMeModern = () => {
+  const containerRef = useRef(null);
+  const topRef = useRef(null);
+  const isInView = useInView(containerRef, { margin: "-100px", once: false });
+  const [showScrollButton, setShowScrollButton] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  
+  // Scroll progress animation
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
+  
+  // Check scroll position for button visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-export const progressBar = {
-  initial: { width: 0 },
-  open: (i) => ({
-    width: `${i}%`,
-    transition: {
-      duration: 1,
-      delay: 0.1 * i,
-      ease: [0.4, 0, 0.2, 1],
-    },
-  }),
-};
-
-const AboutMe = () => {
-  const introduction =
-    "Full-Stack Developer with 2+ years of experience specializing in developing secure, responsive, and scalable web applications. Proficient in modern technologies including Python and PHP, with a focus on data-driven and high-performance solutions. Proven to improve system efficiency by up to 90% through scalable development and stringent security practices.";
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   const skills = [
-    { name: "Frontend: HTML5, CSS3, JavaScript, Tailwind CSS, React", level: 90 },
-    { name: "Backend: Python (Flask, Django), PHP (Laravel, CodeIgniter)", level: 85 },
-    { name: "API Systems: RESTful API, JWT Authentication, LDAP Integration", level: 80 },
-    { name: "Database: MySQL, PostgreSQL, MongoDB", level: 75 },
-    { name: "DevOps: Git, Docker, Vercel, CI/CD Pipelines", level: 70 },
-    { name: "Soft Skills: Problem Solving, Team Collaboration, Agile Methodologies", level: 95 },
+    { 
+      name: "Python Specialist", 
+      tech: "Flask, Django, FastAPI, Pandas, NumPy", 
+      level: 95,
+      icon: <FaPython className="text-blue-400" />,
+      color: "from-blue-400 to-blue-600"
+    },
+    { 
+      name: "React Expert", 
+      tech: "Next.js, Redux, Framer Motion, React Hooks", 
+      level: 90,
+      icon: <FaReact className="text-cyan-400" />,
+      color: "from-cyan-400 to-cyan-600"
+    },
+    { 
+      name: "Backend Development", 
+      tech: "RESTful APIs, Microservices, Authentication (RBAC, LDAP)", 
+      level: 85,
+      icon: <FaLaravel className="text-red-400" />,
+      color: "from-red-400 to-red-600"
+    },
+    { 
+      name: "Database Optimization", 
+      tech: "MySQL, PostgreSQL, Query Optimization, Indexing", 
+      level: 85,
+      icon: <SiPostgresql className="text-blue-500" />,
+      color: "from-blue-500 to-blue-700"
+    },
+    { 
+      name: "UI/UX Implementation", 
+      tech: "Tailwind CSS, Responsive Design, Highcharts", 
+      level: 80,
+      icon: <SiTailwindcss className="text-cyan-300" />,
+      color: "from-cyan-300 to-cyan-500"
+    }
   ];
 
-  const descriptionRef = useRef(null);
-  const isInView = useInView(descriptionRef, { threshold: 0.2, once: false });
-
-  const { scrollYProgress } = useScroll();
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const experiences = [
+    {
+      company: "PT. PLN",
+      period: "Oct 2023 - Dec 2023",
+      location: "Bandung",
+      role: "Full-Stack Web Developer",
+      highlights: [
+        "Built data management app with Flask and Tailwind CSS, improving workflow efficiency by 30%",
+        "Implemented RBAC for multi-level user access control",
+        "Developed 26+ interactive charts with Highcharts"
+      ],
+      tech: ["Flask", "Tailwind CSS", "RBAC", "Highcharts"]
+    },
+    {
+      company: "PT. INTI",
+      period: "Feb 2024 - Apr 2024",
+      location: "Bandung",
+      role: "Full-Stack Web Developer",
+      highlights: [
+        "Built property contract system with CodeIgniter",
+        "Integrated LDAP authentication",
+        "Developed advanced search filters and CRUD operations"
+      ],
+      tech: ["CodeIgniter", "LDAP"]
+    },
+    {
+      company: "Toko Alat Kopi Bandung",
+      period: "Mar 2020 - May 2020",
+      location: "Bandung",
+      role: "Full-Stack Web Developer",
+      highlights: [
+        "Built e-commerce platform with Laravel and PostgreSQL",
+        "Developed admin dashboard for product/transaction management",
+        "Implemented automated email notification system"
+      ],
+      tech: ["Laravel", "PostgreSQL"]
+    }
+  ];
 
   return (
     <section
+      ref={containerRef}
+      className="relative min-h-screen w-full overflow-hidden bg-neutral-950 flex items-center justify-center py-20 px-4 md:px-20"
       id="about"
-      className="min-h-screen bg-red-50 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 dark:from-gray-100 dark:via-white dark:to-gray-100 relative overflow-hidden"
-      style={{ fontFamily: "'Inter', 'Roboto', sans-serif" }}
     >
-      {/* Parallax Background */}
-      <div className="absolute inset-0 w-full h-full overflow-hidden opacity-10">
-        <motion.div
-          style={{ y: y1 }}
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-24 -left-24 w-80 h-80 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 mix-blend-overlay filter blur-[100px]"
-        />
-        <motion.div
-          style={{ y: y2 }}
-          animate={{ scale: [1, 1.3, 1] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-12 right-12 w-96 h-96 rounded-full bg-gradient-to-r from-pink-400 to-purple-500 mix-blend-overlay filter blur-[100px]"
-        />
-      </div>
-
-      <div
-        ref={descriptionRef}
-        className="container mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-16 items-center relative z-10"
+      {/* Floating background elements */}
+      <motion.div 
+        className="absolute inset-0 overflow-hidden"
+        style={{ y }}
       >
-        {/* Image */}
-<motion.div
-  className="w-full h-full flex justify-center items-center lg:order-last"
-  variants={opacity}
-  initial="initial"
-  animate={isInView ? "open" : "closed"}
->
-
-<img
-  src="/3d.png"
-  autoPlay
-  loop
-  muted
-  playsInline
-  className="w-full h-auto object-contain rounded-xl "
-/>
-
-
-</motion.div>
-
-        {/* Text Section */}
-        <div className="flex flex-col gap-16">
-          <motion.div
-            variants={opacity}
-            initial="initial"
-            animate={isInView ? "open" : "closed"}
-            className="flex items-center gap-4"
-          >
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-100 dark:text-gray-900 tracking-tight">
-              About Me
-            </h2>
-            <div className="flex-1 h-px bg-gradient-to-r from-blue-400 to-transparent ml-4" />
-          </motion.div>
-
-          {/* Introduction Text */}
-          <div className="relative">
-            <p className="text-xl sm:text-2xl lg:text-3xl leading-relaxed text-gray-300 dark:text-gray-800 font-medium max-w-5xl tracking-wide">
-              {introduction.split(" ").map((word, index) => (
-                <span key={index} className="inline-flex relative overflow-hidden mr-2">
-                  <motion.span
-                    variants={slideUp}
-                    custom={index}
-                    initial="initial"
-                    animate={isInView ? "open" : "closed"}
-                    className="inline-block"
-                  >
-                    {word}
-                  </motion.span>
-                </span>
-              ))}
-            </p>
-          </div>
-
-          {/* Skills */}
-          <div className="relative">
-            <motion.h3
-              variants={opacity}
-              initial="initial"
-              animate={isInView ? "open" : "closed"}
-              className="text-3xl sm:text-4xl font-semibold text-gray-100 dark:text-gray-900 mb-10 tracking-tight flex items-center gap-4"
-            >
-              <span className="w-10 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 dark:from-blue-600 dark:to-purple-600"></span>
-              Technical Skills
-            </motion.h3>
-
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {skills.map((skill, index) => (
-                <motion.li
-                  key={index}
-                  className="relative overflow-hidden"
-                  variants={slideUp}
-                  custom={index}
-                  initial="initial"
-                  animate={isInView ? "open" : "closed"}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-cyan-500/10 blur-3xl"></div>
+        <div className="absolute bottom-1/3 right-1/3 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl"></div>
+      </motion.div>
+      
+      {/* Main container */}
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="container mx-auto max-w-7xl rounded-[40px] overflow-hidden border border-neutral-800/50 bg-neutral-900/20 backdrop-blur-lg shadow-xl shadow-neutral-900/50"
+      >
+        <div className="p-8 md:p-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Profile Content */}
+            <div className="flex flex-col gap-12">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+                className="flex items-center gap-4"
+              >
+                <motion.div 
+                  className="w-8 h-8 rounded-lg bg-gradient-to-br from-cyan-400 to-emerald-400 flex items-center justify-center"
+                  animate={{
+                    rotate: [0, 10, -10, 0],
+                    scale: [1, 1.1, 1.1, 1]
+                  }}
+                  transition={{
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                    duration: 3
+                  }}
                 >
-                  <Tilt
-                    tiltMaxAngleX={10}
-                    tiltMaxAngleY={10}
-                    perspective={1000}
-                    scale={1.05}
-                    transitionSpeed={2000}
-                    className="flex items-start group"
+                  <span className="text-xs font-bold text-white">DR</span>
+                </motion.div>
+                <span className="text-sm font-medium text-neutral-400">DEVELOPER PROFILE</span>
+              </motion.div>
+              
+              {/* Profile Photo - Mobile First (shown above content on small screens) */}
+              <motion.div
+                className="lg:hidden flex justify-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <Tilt
+                  tiltMaxAngleX={5}
+                  tiltMaxAngleY={5}
+                  scale={1.02}
+                  transitionSpeed={1000}
+                  className="relative w-64 h-64 rounded-2xl overflow-hidden border-2 border-cyan-400/30 shadow-lg shadow-cyan-400/20"
+                >
+                  <motion.img
+                    src={ProfileImage}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    onLoad={() => setImageLoaded(true)}
+                  />
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-900/50"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  />
+                </Tilt>
+              </motion.div>
+              
+              <motion.div
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                className="flex flex-col gap-4"
+              >
+                <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight leading-tight">
+                  <motion.span 
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
                   >
-                    <span className="text-blue-400 dark:text-blue-600 mr-3 mt-2 text-lg">▹</span>
-                    <div className="bg-gray-800/30 dark:bg-gray-200/30 backdrop-blur-md p-5 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 flex-1 border border-gray-700/50 dark:border-gray-300/50 hover:border-blue-400/50 dark:hover:border-blue-600/50">
-                      <div className="flex flex-col">
-                        <span className="font-semibold text-gray-100 dark:text-gray-900 text-lg">
-                          {skill.name.split(": ")[0]}:
-                        </span>
-                        <span className="font-normal text-gray-300 dark:text-gray-700 text-lg">
-                          {skill.name.split(": ")[1]}
-                        </span>
-                        <div className="w-full bg-gray-700/50 dark:bg-gray-300/50 h-2 rounded-full mt-3">
-                          <motion.div
-                            variants={progressBar}
-                            custom={skill.level}
-                            initial="initial"
-                            animate={isInView ? "open" : "initial"}
-                            className="h-full bg-gradient-to-r from-blue-400 to-purple-400 dark:from-blue-600 dark:to-purple-600 rounded-full"
-                          />
+                    FULL-STACK
+                  </motion.span> 
+                  <motion.span
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                  >
+                    {" "}ENGINEER
+                  </motion.span>
+                  <motion.div
+                    className="h-px bg-gradient-to-r from-cyan-400/20 via-cyan-400 to-transparent ml-4"
+                    whileInView={{ scaleX: [0, 1] }}
+                    whileHover={{ scaleX: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
+                    transition={{ duration: 1 }}
+                  />
+                </h2>
+                <motion.p 
+                  className="text-lg text-neutral-400 font-light"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  Python & React Specialist | Database Optimization | Scalable Solutions
+                </motion.p>
+              </motion.div>
+              
+              <motion.div 
+                className="relative p-6 rounded-2xl bg-neutral-900/50 backdrop-blur-md border border-neutral-800/50"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                whileHover={{ 
+                  borderColor: "rgba(34, 211, 238, 0.3)",
+                  boxShadow: "0 0 20px rgba(34, 211, 238, 0.1)"
+                }}
+              >
+                <p className="text-neutral-300 leading-relaxed">
+                  Fullstack Developer with 2+ years experience building web applications using 
+                  <span className="text-cyan-400 font-medium"> Python (Flask)</span> and 
+                  <span className="text-purple-400 font-medium"> PHP (CodeIgniter, Laravel)</span>. 
+                  Proven ability to develop data management systems, RBAC & LDAP authentication, 
+                  automated reporting, and interactive data visualization. Skilled in database 
+                  optimization (MySQL & PostgreSQL), RESTful API development, and responsive 
+                  interfaces with Tailwind CSS. Focused on scalability, security, and clean 
+                  code with an orientation toward efficient, user-friendly solutions.
+                </p>
+              </motion.div>
+
+              {/* Skills Section */}
+              <div className="flex flex-col gap-8">
+                <motion.div 
+                  className="flex items-center gap-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <h3 className="text-xl font-semibold text-white tracking-tight">
+                    TECHNICAL EXPERTISE
+                  </h3>
+                  <div className="h-px flex-1 bg-gradient-to-r from-cyan-400/20 to-transparent"></div>
+                </motion.div>
+
+                <div className="grid grid-cols-1 gap-4">
+                  {skills.map((skill, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 + i * 0.1 }}
+                    >
+                      <Tilt
+                        tiltMaxAngleX={5}
+                        tiltMaxAngleY={5}
+                        scale={1.02}
+                        transitionSpeed={1000}
+                        className="p-5 rounded-xl border border-neutral-800 bg-gradient-to-br from-neutral-900/50 to-neutral-900/20 backdrop-blur-sm hover:border-cyan-400/30 transition-all duration-300 relative overflow-hidden group"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/5 to-emerald-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="relative z-10">
+                          <div className="flex justify-between items-center mb-3">
+                            <div className="flex items-center gap-3">
+                              <motion.div 
+                                className="w-8 h-8 rounded-lg bg-neutral-800 flex items-center justify-center"
+                                whileHover={{ rotate: 15 }}
+                              >
+                                {skill.icon}
+                              </motion.div>
+                              <h4 className="font-medium text-white">{skill.name}</h4>
+                            </div>
+                            <span className="text-sm font-mono text-cyan-400">{skill.level}%</span>
+                          </div>
+                          <p className="text-sm text-neutral-400 mb-4 ml-11">{skill.tech}</p>
+                          <div className="w-full bg-neutral-800 h-1.5 rounded-full overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              animate={isInView ? { width: `${skill.level}%` } : {}}
+                              transition={{ delay: 0.7 + i * 0.1, type: "spring", stiffness: 100 }}
+                              className={`h-full bg-gradient-to-r ${skill.color} rounded-full`}
+                            />
+                          </div>
                         </div>
+                      </Tilt>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Experience Timeline and Photo */}
+            <div className="space-y-8">
+              {/* Profile Photo - Desktop (shown on right side on larger screens) */}
+              <motion.div
+                className="hidden lg:flex justify-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <Tilt
+                  tiltMaxAngleX={5}
+                  tiltMaxAngleY={5}
+                  scale={1.02}
+                  transitionSpeed={1000}
+                  className="relative w-full h-80 rounded-2xl overflow-hidden border-2 border-cyan-400/30 shadow-lg shadow-cyan-400/20"
+                >
+                  <motion.img
+                    src={ProfileImage}
+                    alt="Profile"
+                    className="w-full h-full object-cover"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    onLoad={() => setImageLoaded(true)}
+                  />
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-900/50"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  />
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                  >
+                    <h3 className="text-xl font-bold text-white">Daffa Revan</h3>
+                    <p className="text-cyan-400">Full-Stack Developer</p>
+                  </motion.div>
+                </Tilt>
+              </motion.div>
+
+              <motion.div 
+                className="p-6 rounded-2xl bg-neutral-900/50 backdrop-blur-md border border-neutral-800/50"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                whileHover={{ 
+                  borderColor: "rgba(34, 211, 238, 0.3)",
+                  boxShadow: "0 0 20px rgba(34, 211, 238, 0.1)"
+                }}
+              >
+                <motion.h3 
+                  className="text-xl font-semibold text-white mb-6"
+                  initial={{ opacity: 0, x: -10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  PROFESSIONAL JOURNEY
+                </motion.h3>
+                
+                <div className="space-y-6">
+                  {experiences.map((exp, i) => (
+                    <motion.div 
+                      key={i}
+                      className="relative pl-8 border-l-2 border-cyan-400/30"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.6 + i * 0.15 }}
+                    >
+                      <motion.div 
+                        className="absolute w-3 h-3 rounded-full bg-cyan-400 -left-1.5 mt-1"
+                        whileHover={{ scale: 1.5 }}
+                      ></motion.div>
+                      <div className="flex flex-wrap justify-between items-baseline">
+                        <h4 className="text-lg font-medium text-white">{exp.company}</h4>
+                        <span className="text-xs text-cyan-400">{exp.location}</span>
                       </div>
-                    </div>
-                  </Tilt>
-                </motion.li>
-              ))}
-            </ul>
+                      <div className="flex justify-between items-baseline">
+                        <p className="text-sm text-neutral-400 mb-2">{exp.role}</p>
+                        <span className="text-xs text-neutral-500">{exp.period}</span>
+                      </div>
+                      <ul className="text-sm text-neutral-300 space-y-2 list-disc list-inside">
+                        {exp.highlights.map((highlight, hi) => (
+                          <motion.li 
+                            key={hi}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 0.8 + i * 0.15 + hi * 0.1 }}
+                          >
+                            {highlight.split(/(?=\<span)/).map((part, pi) => {
+                              if (exp.tech.some(tech => part.includes(tech))) {
+                                const tech = exp.tech.find(t => part.includes(t));
+                                const colors = {
+                                  "Flask": "text-neutral-300",
+                                  "Tailwind CSS": "text-cyan-300",
+                                  "RBAC": "text-purple-400",
+                                  "Highcharts": "text-emerald-400",
+                                  "CodeIgniter": "text-orange-400",
+                                  "LDAP": "text-blue-400",
+                                  "Laravel": "text-red-400",
+                                  "PostgreSQL": "text-blue-500"
+                                };
+                                return (
+                                  <span key={pi} className={`${colors[tech] || "text-cyan-400"} font-medium`}>
+                                    {tech}
+                                  </span>
+                                );
+                              }
+                              return part;
+                            })}
+                          </motion.li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Skills Icons */}
+              <motion.div 
+                className="p-6 rounded-2xl bg-neutral-900/50 backdrop-blur-md border border-neutral-800/50"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                whileHover={{ 
+                  borderColor: "rgba(34, 211, 238, 0.3)",
+                  boxShadow: "0 0 20px rgba(34, 211, 238, 0.1)"
+                }}
+              >
+                <motion.h3 
+                  className="text-xl font-semibold text-white mb-6"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                >
+                  CORE TECHNOLOGIES
+                </motion.h3>
+                <motion.div 
+                  className="flex flex-wrap gap-4 justify-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.7, staggerChildren: 0.1 }}
+                >
+                  <SkillIcon icon={FaPython} tooltip="Python" color="text-blue-400" delay={0.7} />
+                  <SkillIcon icon={FaReact} tooltip="React" color="text-cyan-400" delay={0.8} />
+                  <SkillIcon icon={SiFlask} tooltip="Flask" color="text-neutral-300" delay={0.9} />
+                  <SkillIcon icon={FaPhp} tooltip="PHP" color="text-purple-400" delay={1.0} />
+                  <SkillIcon icon={SiCodeigniter} tooltip="CodeIgniter" color="text-orange-400" delay={1.1} />
+                  <SkillIcon icon={FaLaravel} tooltip="Laravel" color="text-red-400" delay={1.2} />
+                  <SkillIcon icon={SiTailwindcss} tooltip="Tailwind CSS" color="text-cyan-300" delay={1.3} />
+                  <SkillIcon icon={SiMysql} tooltip="MySQL" color="text-blue-500" delay={1.4} />
+                  <SkillIcon icon={SiPostgresql} tooltip="PostgreSQL" color="text-blue-600" delay={1.5} />
+                </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
-      </div>
+      </motion.div>
+
+      {/* Scroll to top button */}
+      <AnimatePresence>
+        {showScrollButton && (
+          <motion.button
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-gradient-to-br from-cyan-400 to-emerald-400 text-white shadow-lg hover:shadow-cyan-400/30 transition-all duration-300 flex items-center justify-center"
+            whileHover={{ 
+              scale: 1.1,
+              boxShadow: "0 0 20px rgba(34, 211, 238, 0.5)"
+            }}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Scroll to top"
+          >
+            <FaArrowUp className="text-xl" />
+            <motion.span 
+              className="absolute -bottom-8 text-xs font-medium text-cyan-400 whitespace-nowrap"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+            </motion.span>
+          </motion.button>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
 
-export default AboutMe;
+const SkillIcon = ({ icon: Icon, tooltip, color, delay = 0 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  return (
+    <motion.div 
+      className="relative flex items-center justify-center"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: 1, opacity: 1 }}
+      transition={{ delay, type: "spring", stiffness: 300 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <motion.div
+        whileHover={{ scale: 1.2, y: -5 }}
+        className={`p-3 rounded-xl bg-neutral-800/50 backdrop-blur-sm ${color} transition-all duration-300 ${isHovered ? 'shadow-lg shadow-cyan-400/20' : ''}`}
+      >
+        <Icon className="text-3xl" />
+      </motion.div>
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 10 }}
+            transition={{ type: "spring", stiffness: 300 }}
+            className="absolute -bottom-10 bg-neutral-800 text-white text-xs px-2 py-1 rounded whitespace-nowrap shadow-lg"
+          >
+            {tooltip}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+export default AboutMeModern;
