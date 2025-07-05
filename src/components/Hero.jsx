@@ -51,18 +51,15 @@ const HeroSection = () => {
   };
 
   return (
-    <section
-      className="hero bg-red-50 relative -mt-[80px] z-20 h-screen w-full flex justify-center items-center overflow-hidden font-sans"
-    >
-      {/* ✅ Background GIF */}
-<div className="absolute inset-0 w-full h-full mt-10 z-0 item-center justify-center flex pointer-events-none">
-  <img
-    src="bg3.png"
-    alt="Hero Background"
-    className=" h-auto"
-  />
-</div>
-
+    <section className="hero bg-red-50 relative -mt-[80px] z-20 h-screen w-full flex justify-center items-center overflow-hidden font-sans">
+      {/* Background Image */}
+      <div className="absolute inset-0 w-full h-full mt-10 z-0 flex items-center justify-center pointer-events-none">
+        <img
+          src="bg3.png"
+          alt="Hero Background"
+          className="h-auto"
+        />
+      </div>
 
       {/* Floating Particles */}
       {[...Array(15)].map((_, i) => (
@@ -197,7 +194,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 20 }}
-          className="fixed bottom-6 right-6 z-40 "
+          className="fixed bottom-6 right-6 z-40"
         >
           <MagneticButton>
             <button
