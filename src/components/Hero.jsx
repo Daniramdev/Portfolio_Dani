@@ -59,7 +59,7 @@ const HeroSection = () => {
   <img
     src="bg.png"
     alt="Hero Background"
-    className=" h-auto"
+    className=" h-full"
   />
 </div>
 
