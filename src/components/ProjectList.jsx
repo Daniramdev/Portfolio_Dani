@@ -373,7 +373,7 @@ const ProjectList = () => {
   return (
     <div 
       id="projects" 
-      className="min-h-screen bg-gray-950  text-white py-4 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      className="min-h-screen bg-gray-950 font-sans text-white py-4 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
       ref={containerRef}
     >
       <div className="max-w-6xl mx-auto relative">

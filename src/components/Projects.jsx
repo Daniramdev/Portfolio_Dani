@@ -56,13 +56,13 @@ function ProjectSection() {
   };
 
   return (
-    <div className="relative py-20 overflow-hidden bg-gray-900">
+    <div className="relative py-20 overflow-hidden font-sans">
       <motion.h2 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="text-3xl md:text-4xl font-bold text-white mb-12 text-center px-4"
+        className="text-3xl md:text-4xl font-bold text-gray-300 mb-12 text-center px-4"
       >
         My <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Galery</span>
       </motion.h2>

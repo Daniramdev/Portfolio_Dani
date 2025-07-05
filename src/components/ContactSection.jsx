@@ -36,7 +36,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="relative bg-gray-950 text-gray-300 py-16 px-4 overflow-hidden">
+    <section id="contact" className="relative bg-gray-950 font-sans text-gray-300 py-16 px-4 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-20 -left-20 w-96 h-96 bg-blue-900/10 rounded-full filter blur-3xl opacity-20"></div>

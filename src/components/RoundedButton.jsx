@@ -37,7 +37,7 @@ export default function RoundedButton({
 
   return (
     <div
-      className="relative overflow-hidden rounded-full border border-gray-500 cursor-pointer flex items-center justify-center px-6 py-2" // Ukuran lebih kecil: px-6 py-2
+      className="relative overflow-hidden rounded-full font-sans border border-gray-500 cursor-pointer flex items-center justify-center px-6 py-2" // Ukuran lebih kecil: px-6 py-2
       onMouseEnter={manageMouseEnter}
       onMouseLeave={manageMouseLeave}
       {...attributes}

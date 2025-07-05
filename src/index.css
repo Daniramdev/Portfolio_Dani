@@ -1,5 +1,7 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
 @import "tailwindcss"; /* ← Harus di paling atas jika pakai Tailwind v4 */
 
 /* Atur font global */
@@ -9,6 +11,7 @@ html {
   margin: 0;
   padding: 0;
 }
+
 
 /* Kelas custom opsional */
 .font-body {
@@ -141,4 +144,13 @@ html {
 
 .moving-images-right:hover {
   animation-play-state: paused;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

@@ -4,7 +4,7 @@ function MovingText() {
   const text = "- Dani Ramdani - Fullstack Web Developer - Dani Ramdani - Fullstack Web Developer ";
 
   return (
-    <div className="flex justify-center items-center h-40 bg-gray-900 shadow-lg overflow-hidden">
+    <div className="flex justify-center font-sans items-center h-40 bg-gray-900 shadow-lg overflow-hidden">
       {/* Container utama */}
       <div className="moving-text-wrapper">
         <div className="moving-text-track">
