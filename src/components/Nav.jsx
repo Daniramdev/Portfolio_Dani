@@ -11,9 +11,9 @@ export const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="text-2xl md:text-sm font-bold px-4 md:px-20 py-4 z-50 relative font-sans">
+    <nav className="text-2xl md:text-sm font-bold px-4 md:px-20  z-50 relative font-sans">
       {/* Desktop Navigation */}
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center py-2">
         <img src="/images/logo.png" alt="Logo" className="h-10" />
 
         {/* Desktop Menu */}

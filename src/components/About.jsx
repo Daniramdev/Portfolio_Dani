@@ -83,7 +83,7 @@ const AboutMe = () => {
   return (
     <section
       id="about"
-      className="min-h-screen flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-gray-100 dark:via-white dark:to-gray-100 relative overflow-hidden"
+      className="min-h-screen bg-red-50 flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 dark:from-gray-100 dark:via-white dark:to-gray-100 relative overflow-hidden"
       style={{ fontFamily: "'Inter', 'Roboto', sans-serif" }}
     >
       {/* Parallax Background */}
@@ -115,12 +115,12 @@ const AboutMe = () => {
 >
 
 <video
-  src="vidio.mp4"
+  src="vidio_c.mp4"
   autoPlay
   loop
   muted
   playsInline
-  className="w-full h-auto object-contain rounded-xl shadow-lg"
+  className="w-full h-auto object-contain rounded-xl "
 />
 
 
