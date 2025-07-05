@@ -53,13 +53,18 @@ const HeroSection = () => {
   return (
     <section className="hero bg-red-50 relative -mt-[80px] z-20 h-screen w-full flex justify-center items-center overflow-hidden font-sans">
       {/* Background Image */}
-      <div className="absolute inset-0 w-full h-full mt-10 z-0 flex items-center justify-center pointer-events-none">
-        <img
-          src="bg3.png"
-          alt="Hero Background"
-          className="h-auto"
-        />
-      </div>
+     <div className="absolute inset-0 w-full h-full mt-10 z-0 flex items-center justify-center pointer-events-none">
+  <video 
+    autoPlay 
+    loop 
+    muted 
+    playsInline
+    className="w-full h-full object-cover"
+  >
+    <source src="vidio_c.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
 
       {/* Floating Particles */}
       {[...Array(15)].map((_, i) => (
