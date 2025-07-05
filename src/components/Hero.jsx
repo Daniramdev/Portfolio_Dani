@@ -41,7 +41,7 @@ const HeroSection = () => {
 
   const floatingAnimation = {
     animate: {
-      y: ["0%", "-10%", "0%"],
+      y: ["1%", "-10%", "0%"],
       transition: {
         duration: 4,
         repeat: Infinity,
@@ -52,16 +52,17 @@ const HeroSection = () => {
 
   return (
     <section
-      className="hero relative -mt-[80px] z-20 h-screen w-full flex justify-center items-center overflow-hidden font-sans"
+      className="hero bg-red-50 relative -mt-[80px] z-20 h-screen w-full flex justify-center items-center overflow-hidden font-sans"
     >
       {/* ✅ Background GIF */}
-      <div className="absolute inset-0 w-full item-center justify-center flex h-full overflow-hidden z-0 pointer-events-none mt-16">
-        <img
-          src="/hero-videoo.gif"
-          alt="Hero Background Animation"
-          className="h-[90%] "
-        />
-      </div>
+<div className="absolute inset-0 w-full h-full mt-10 z-0 item-center justify-center flex pointer-events-none">
+  <img
+    src="bg3.png"
+    alt="Hero Background"
+    className=" h-auto"
+  />
+</div>
+
 
       {/* Floating Particles */}
       {[...Array(15)].map((_, i) => (
@@ -119,7 +120,7 @@ const HeroSection = () => {
 
         {/* Subtitle */}
         <motion.p
-          className="text-xl md:text-2xl text-gray-900 text-center max-w-2xl py-2 mb-12"
+          className="text-xl md:text-2xl text-gray-800 text-center max-w-2xl py-2 mb-12"
           variants={slideUp}
           custom={1}
           initial="initial"
