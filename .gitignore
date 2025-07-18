@@ -1,0 +1,8 @@
+# Create/update .gitignore with standard React/Vite items
+echo "node_modules/
+.env
+*.mp4
+*.png
+*.jpg
+eval*
+" > .gitignore
