@@ -1,22 +1,20 @@
 
 
-@import url('https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Beiruti:wght@200..900&family=DM+Serif+Display:ital@0;1&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Inter+Tight:wght@500&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
 
 @import "tailwindcss"; /* ← Harus di paling atas jika pakai Tailwind v4 */
 
 /* Atur font global */
 body,
 html {
-  font-family: 'Poppins', sans-serif;
+    font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
 }
 
 
-/* Kelas custom opsional */
-.font-body {
-  font-family: 'Poppins', sans-serif;
-}
 
 
 .smooth-transform {

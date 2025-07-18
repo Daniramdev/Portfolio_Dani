@@ -28,7 +28,7 @@ export default function LoadingScreen({ onComplete }) {
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 z-50 font-sans flex items-center justify-center bg-gray-900"
+      className="fixed inset-0 z-50 font-sans flex items-center justify-center bg-black"
     >
       <div className="smooth-transform flex flex-col items-center p-4 max-w-xs w-full">
         {/* Loader */}

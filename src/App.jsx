@@ -4,7 +4,7 @@ import LoadingScreen from "./components/LoadingScreen";
 import HeroSection from "./components/Hero";
 import AboutMe from "./components/About";
 import MovingText from "./components/AnimatedText";
-import ProjectList from "./components/ProjectList";
+
 import ProjectSection from "./components/Projects";
 import ContactSection from "./components/ContactSection";
 
@@ -33,7 +33,7 @@ export default function App() {
       <HeroSection/>
       <MovingText/>
       <AboutMe/>
-      <ProjectList/>
+ 
       <ProjectSection/>
       <ContactSection/>
      

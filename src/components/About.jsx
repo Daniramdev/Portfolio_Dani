@@ -126,6 +126,26 @@ const AboutMeModern = () => {
       className="relative min-h-screen w-full overflow-hidden bg-neutral-950 flex items-center justify-center py-20 px-4 md:px-20"
       id="about"
     >
+
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-3xl z-40 flex justify-center items-center">
+        <div className="w-16 h-1 bg-neutral-700 rounded-full"></div>
+      </div>
+
+      {/* Modern gradient mesh background with dynamic island effect */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-neutral-900/70 via-neutral-950 to-neutral-950"></div>
+        <div className="absolute top-0 left-0 w-full h-full opacity-20 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]">
+          <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
+            <defs>
+              <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.5" className="text-neutral-800"></path>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid)"></rect>
+          </svg>
+        </div>
+      </div>
+
       {/* Floating background elements */}
       <motion.div 
         className="absolute inset-0 overflow-hidden"
@@ -181,12 +201,12 @@ const AboutMeModern = () => {
                   tiltMaxAngleY={5}
                   scale={1.02}
                   transitionSpeed={1000}
-                  className="relative w-64 h-64 rounded-2xl overflow-hidden border-2 border-cyan-400/30 shadow-lg shadow-cyan-400/20"
+                  className="relative w-64 h-[70vh] rounded-2xl overflow-hidden border-2 border-cyan-400/30 shadow-lg shadow-cyan-400/20"
                 >
                   <motion.img
                     src={ProfileImage}
                     alt="Profile"
-                    className="w-full h-full object-cover"
+                    className="w-full h-[70vh] "
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
@@ -335,12 +355,12 @@ const AboutMeModern = () => {
                   tiltMaxAngleY={5}
                   scale={1.02}
                   transitionSpeed={1000}
-                  className="relative w-full h-80 rounded-2xl overflow-hidden border-2 border-cyan-400/30 shadow-lg shadow-cyan-400/20"
+                  className="relative w-full items-center justify-center flex  h-[110vh] rounded-2xl overflow-hidden border-2 border-cyan-400/30 shadow-lg shadow-cyan-400/20"
                 >
                   <motion.img
                     src={ProfileImage}
                     alt="Profile"
-                    className="w-full h-full object-cover"
+                    className=" h-[150vh] "
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}
@@ -358,7 +378,7 @@ const AboutMeModern = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
                   >
-                    <h3 className="text-xl font-bold text-white">Daffa Revan</h3>
+                    <h3 className="text-xl font-bold text-white">Dani Ramdani</h3>
                     <p className="text-cyan-400">Full-Stack Developer</p>
                   </motion.div>
                 </Tilt>

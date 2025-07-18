@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MagneticButton from "./MagneticButton";
 import {
   FaGithub,
@@ -10,51 +10,58 @@ import {
 export const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+
+  useEffect(() => {
+    const handleScroll = () => {
+      
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="text-2xl md:text-sm font-bold px-4 md:px-20  z-50 relative font-sans">
+    <nav className={`fixed w-full text-2xl md:text-sm font-bold px-4 md:px-20 z-50 transition-all duration-300  'bg-white backdrop-blur-md' : 'bg-transparent'
+    }`}>
       {/* Desktop Navigation */}
       <div className="flex justify-between items-center py-2">
-        <img src="/images/logo.png" alt="Logo" className="h-10" />
+        <img src="/images/logo1.png" alt="Logo" className="h-20" />
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex gap-8 text-black">
+        <ul className="hidden md:flex gap-8 text-white">
           <MagneticButton>
-            <a href="#about" className="hover:text-gray-600 transition-colors duration-300">
+            <a href="#about" className="hover:text-gray-600 text-white transition-colors duration-300">
               About
             </a>
           </MagneticButton>
 
           <MagneticButton>
-            <a href="#projects" className="hover:text-gray-600 transition-colors duration-300">
-              Project
+            <a href="#projects" className="hover:text-gray-600 text-white transition-colors duration-300">
+              Projects
             </a>
           </MagneticButton>
 
           <MagneticButton>
-            <a href="#contact" className="hover:text-gray-600 transition-colors duration-300">
+            <a href="#contact" className="hover:text-gray-600 text-white transition-colors duration-300">
               Contact
             </a>
           </MagneticButton>
         </ul>
-
-      {/* Hamburger Button for Mobile */}
 <button
   onClick={() => setIsMenuOpen(!isMenuOpen)}
-  className="md:hidden focus:outline-none z-50"
+  className="md:hidden focus:outline-none z-50 p-2 rounded-full transition-all duration-200 hover:bg-white/10 active:bg-white/20"
   aria-label="Open menu"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="h-8 w-8 text-black"
+    className="h-8 w-8 text-white"  
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
+    strokeWidth={2}
   >
-    {/* Ikon hamburger (☰) permanen */}
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={2}
       d="M4 6h16M4 12h16M4 18h16"
     />
   </svg>
@@ -63,11 +70,11 @@ export const Nav = () => {
 
       {/* Mobile Sidebar / Drawer */}
       <div
-        className={`fixed top-0 right-0 h-full w-72 bg-gray-900/95 backdrop-blur-md shadow-lg transform transition-transform duration-300 ease-in-out z-50 ${
+        className={`fixed top-0 right-0 h-full w-72  backdrop-blur-md shadow-lg transform transition-transform duration-300 ease-in-out z-50 ${
           isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        {/* Tombol Close X - HANYA SATU DAN FIXED */}
+        {/* Close Button */}
         <button
           onClick={() => setIsMenuOpen(false)}
           className="absolute top-6 right-6 text-white hover:text-gray-300 transition-all duration-300 z-50"
@@ -89,7 +96,7 @@ export const Nav = () => {
           </svg>
         </button>
 
-        {/* Konten Sidebar */}
+        {/* Sidebar Content */}
         <div className="p-6 flex flex-col gap-8 text-white mt-20">
           <MagneticButton>
             <a
@@ -103,11 +110,11 @@ export const Nav = () => {
 
           <MagneticButton>
             <a
-              href="#project"
+              href="#projects"
               className="text-3xl hover:text-blue-400 transition-colors duration-300"
               onClick={() => setIsMenuOpen(false)}
             >
-              Project
+              Projects
             </a>
           </MagneticButton>
 
@@ -121,7 +128,7 @@ export const Nav = () => {
             </a>
           </MagneticButton>
 
-          {/* Footer with Social Media Icons */}
+          {/* Social Media Links */}
           <div className="pt-8 border-t border-white/20 mt-24">
             <p className="text-sm text-white/70 mb-4">Follow Me</p>
             <div className="flex items-center grid grid-cols-4">

@@ -3,7 +3,7 @@ import gsap from "gsap";
 
 export default function RoundedButton({
   children,
-  backgroundColor = "#141d4b",
+  backgroundColor = "#22d3ee",
   ...attributes
 }) {
   const circle = useRef(null);
@@ -43,7 +43,7 @@ export default function RoundedButton({
       {...attributes}
     >
       {/* Text */}
-      <p className="relative z-10 transition-colors duration-400 text-sm  text-black hover:text-white">
+      <p className="relative z-10 transition-colors duration-400 text-sm  text-white hover:text-white">
         {children}
       </p>
 

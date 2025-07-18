@@ -12,10 +12,7 @@ const ContactSection = () => {
     offset: ["start end", "end start"]
   });
 
-  // 3D scroll effects
-  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-  const opacityBg = useTransform(scrollYProgress, [0.2, 0.4, 0.8, 1], [1, 0.8, 0.5, 0]);
-
+ 
   // Floating blob component
   const Blob = () => (
     <Sphere args={[1, 64, 64]} scale={1.5}>
@@ -38,17 +35,7 @@ const ContactSection = () => {
       className="relative min-h-screen w-full bg-neutral-950 flex items-center justify-center px-4 md:px-8 overflow-hidden"
     >
       {/* 3D Background Element */}
-      <motion.div 
-        className="absolute inset-0 z-0 opacity-50"
-        style={{ y: yBg, opacity: opacityBg }}
-      >
-        <Canvas camera={{ position: [0, 0, 5] }}>
-          <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} />
-          <Blob />
-          <OrbitControls enableZoom={false} enablePan={false} />
-        </Canvas>
-      </motion.div>
+
 
       {/* Subtle grid pattern */}
       <div className="absolute inset-0 opacity-5 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
@@ -64,7 +51,7 @@ const ContactSection = () => {
           viewport={{ once: true }}
         >
           <motion.h2 
-            className="text-4xl md:text-6xl font-bold text-white mb-6"
+            className="text-4xl md:text-6xl text-transparent font-bold bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 mb-6"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -72,14 +59,14 @@ const ContactSection = () => {
           >
             Get in Touch
           </motion.h2>
-          <motion.div
-            className="h-[2px] bg-gradient-to-r from-blue-500 to-transparent w-24 mx-auto"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-            viewport={{ once: true }}
-          />
-        </motion.div>
+                <motion.div
+                        className="h-px bg-gradient-to-r from-cyan-400/20 via-cyan-400 to-transparent ml-4"
+                        whileInView={{ scaleX: [0, 1] }}
+                        whileHover={{ scaleX: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
+                        transition={{ duration: 1 }}
+                      />
+                    </motion.div>
+     
 
         {/* Two column layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
@@ -233,9 +220,15 @@ const ContactSection = () => {
           whileInView={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
           viewport={{ once: true }}
-        >
-          <p className="text-white/50 text-sm">
-            © {new Date().getFullYear()} Dani Ramdani. All rights reserved.
+        >  
+        <div className='items-center grap-3 justify-center flex'>
+        <img src="/images/logo1.png" alt="Logo" className="h-52" />
+          <p className="text-transparent font-bold bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 md:text-8xl text-2xl">
+          Dani Ramdani
+          </p>
+          </div> 
+          <p className="text-white/50 xl">
+            © {new Date().getFullYear()} 
           </p>
         </motion.div>
       </div>
