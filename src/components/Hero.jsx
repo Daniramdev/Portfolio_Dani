@@ -5,23 +5,29 @@ import { OrbitControls, MeshDistortMaterial } from "@react-three/drei";
 import MagneticButton from "./MagneticButton";
 import RoundedButton from "./RoundedButton";
 
-const Blob = ({ color = "", emissive = "", position = [0, 0, 0], scale = [1, 1, 1] }) => {
+const Blob = ({ color = "", emissive = "", position = [0, 0, 0], scale = 1 }) => {
   return (
-    <mesh position={position} scale={scale}>
-      <sphereGeometry args={[2, 100, 100]} />
+    <mesh position={position} scale={[scale, scale, scale]}>
+      <sphereGeometry args={[1, 128, 128]} /> {/* Meningkatkan detail geometri */}
       <MeshDistortMaterial
         color={color}
         emissive={emissive}
-        emissiveIntensity={0.6}
-        roughness={0.05}
-        metalness={0.9}
-        distort={0.4}
-        speed={2}
+        emissiveIntensity={1.2} // Lebih terang
+        roughness={0.1} // Sedikit lebih kasar untuk efek metalik
+        metalness={1.0} // Metalik maksimal
+        distort={0.6} // Distorsi lebih kuat
+        speed={3.0} // Animasi lebih cepat
         clearcoat={1}
-        clearcoatRoughness={0.05}
-        envMapIntensity={2}
+        clearcoatRoughness={0.1}
+        envMapIntensity={2.0} // Refleksi lingkungan lebih kuat
         transparent
-        opacity={0.92}
+        opacity={0.95}
+        wireframe={false} // Pastikan wireframe mati
+        // Tambahan parameter untuk efek lebih ekstrim
+        refractionRatio={0.8}
+        ior={1.5}
+        specularColor="#ffffff"
+        specularIntensity={1}
       />
     </mesh>
   );
@@ -33,12 +39,20 @@ const HeroSection = () => {
   const { scrollYProgress } = useScroll();
   const yPos = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const [showButton, setShowButton] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [hoverStates, setHoverStates] = useState({
     title: false,
     subtitle: false,
     button: false,
     scrollIndicator: false
   });
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setShowButton(window.scrollY > 300);
@@ -63,7 +77,7 @@ const HeroSection = () => {
 
   return (
     <>
-      <section className="relative z-20 h-screen w-full flex justify-center items-center bg-neutral-950">
+      <section className="relative z-20 h-screen w-full flex justify-center items-center bg-neutral-950 overflow-hidden">
         {/* Background Grid Pattern */}
         <div className="absolute inset-0 overflow-hidden z-0 h-screen">
           <div className="absolute inset-0 h-full w-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-950/70 via-neutral-950 to-neutral-950" />
@@ -79,36 +93,61 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* 3D Canvas with hover effect */}
+        {/* Responsive 3D Canvas */}
         <motion.div 
           className="absolute inset-0 z-10"
-          whileHover={{ opacity: 0.9 }}
+          whileHover={{ opacity: isMobile ? 1 : 0.9 }} // Disable hover effect on mobile
           transition={{ duration: 0.3 }}
         >
-          <Canvas camera={{ position: [1, 0, 6] }}>
-            <ambientLight intensity={0.6} />
-            <pointLight position={[0, 0, 5]} intensity={3} />
-            <directionalLight position={[5, 5, 5]} intensity={2} />
-            <Blob position={[-0.2, 0.1, -1, -5]} scale={[1.5, 1.5, 1.5]} />
-            <OrbitControls enableZoom={false} enablePan={false} />
-          </Canvas>
+         <Canvas 
+  camera={{ 
+    position: [0, 0, isMobile ? 6 : 4], // Kamera lebih dekat
+    fov: isMobile ? 70 : 50 // Field of view lebih lebar
+  }}
+  performance={{ min: 0.8 }} // Prioritas performa
+  gl={{
+    antialias: true,
+    powerPreference: "high-performance"
+  }}
+>
+  <ambientLight intensity={1.0} /> {/* Cahaya lebih terang */}
+  <pointLight position={[10, 10, 10]} intensity={3} color="#22d3ee" />
+  <pointLight position={[-10, -10, -10]} intensity={3} color="#3b82f6" />
+  <directionalLight position={[5, 5, 5]} intensity={2.5} />
+  
+  <Blob 
+    position={[0, 0, 0]} 
+    scale={isMobile ? 1.5 : 2.0} // Lebih besar
+    color="#3b82f6"
+    emissive="#22d3ee"
+  />
+  
+  <OrbitControls 
+    enableZoom={false}
+    enablePan={false}
+    enableRotate={!isMobile}
+    autoRotate={!isMobile} // Rotasi otomatis
+    autoRotateSpeed={5} // Rotasi lebih cepat
+    rotateSpeed={1.5} // Respons rotasi lebih cepat
+  />
+</Canvas>
         </motion.div>
 
-        {/* Content with enhanced hover effects */}
+        {/* Content */}
         <motion.div
           ref={ref}
-          className="relative z-20 w-full p-0 max-w-full px-8 flex flex-col items-center"
+          className="relative z-20 w-full p-0 max-w-full px-4 md:px-8 flex flex-col items-center"
           style={{ y: yPos }}
         >
           <motion.div 
             className="relative overflow-hidden" 
             initial="initial" 
             animate={isInView ? "animate" : "initial"}
-            onHoverStart={() => setHoverStates({...hoverStates, title: true})}
-            onHoverEnd={() => setHoverStates({...hoverStates, title: false})}
+            onHoverStart={() => !isMobile && setHoverStates({...hoverStates, title: true})}
+            onHoverEnd={() => !isMobile && setHoverStates({...hoverStates, title: false})}
           >
             <motion.h1
-              className="text-5xl md:text-8xl font-bold mb-4 text-white tracking-tighter"
+              className="text-4xl md:text-6xl lg:text-8xl font-bold mb-4 text-white tracking-tighter px-4 text-center"
               style={{ 
                 fontWeight: 700,
                 letterSpacing: '-0.05em',
@@ -127,15 +166,15 @@ const HeroSection = () => {
               Dani <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Ramdani</span>
             </motion.h1>
             <motion.div
-              className="h-px bg-gradient-to-r from-cyan-400/20 via-cyan-400 to-transparent ml-4"
+              className="h-px bg-gradient-to-r from-cyan-400/20 via-cyan-400 to-transparent mx-auto"
               whileInView={{ scaleX: [0, 1] }}
-              whileHover={{ scaleX: [1, 1.2, 1], opacity: [1, 0.8, 1] }}
+              whileHover={{ scaleX: isMobile ? [1,1] : [1, 1.2, 1], opacity: isMobile ? [1,1] : [1, 0.8, 1] }}
               transition={{ duration: 1 }}
             />
           </motion.div>
 
           <motion.p
-            className="text-xl md:text-2xl text-white/90 text-center max-w-2xl py-2"
+            className="text-lg md:text-xl lg:text-2xl text-white/90 text-center max-w-2xl py-2 px-4"
             style={{ 
               fontWeight: 400,
               letterSpacing: '0.02em'
@@ -145,7 +184,7 @@ const HeroSection = () => {
             initial="initial"
             animate={isInView ? "animate" : "initial"}
             whileHover={{
-              textShadow: "0 0 10px rgba(255, 255, 255, 0.7)",
+              textShadow: isMobile ? "none" : "0 0 10px rgba(255, 255, 255, 0.7)",
               color: "rgba(255, 255, 255, 1)",
               transition: { duration: 0.3 }
             }}
@@ -158,14 +197,14 @@ const HeroSection = () => {
             custom={2}
             initial="initial"
             animate={isInView ? "animate" : "initial"}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: isMobile ? 1 : 1.05 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
             <MagneticButton>
               <RoundedButton 
                 onClick={scrollToContact}
                 whileHover={{
-                  boxShadow: "0 0 20px rgba(34, 211, 238, 0.8)",
+                  boxShadow: isMobile ? "none" : "0 0 20px rgba(34, 211, 238, 0.8)",
                   background: "linear-gradient(to right, #22d3ee, #3b82f6)"
                 }}
               >
@@ -182,13 +221,13 @@ const HeroSection = () => {
           </motion.div>
         </motion.div>
 
-        {/* Enhanced Scroll Indicator with hover */}
+        {/* Enhanced Scroll Indicator */}
         {!showButton && (
           <motion.div
             className="absolute bottom-10 text-white flex flex-col items-center py-2 cursor-pointer"
             animate={{ y: [0, 10, 0] }}
             whileHover={{ 
-              scale: 1.1,
+              scale: isMobile ? 1 : 1.1,
               color: "#22d3ee",
               transition: { duration: 0.3 }
             }}
@@ -197,7 +236,7 @@ const HeroSection = () => {
           >
             <motion.span 
               className="text-sm mb-2"
-              whileHover={{ textShadow: "0 0 8px rgba(34, 211, 238, 0.8)" }}
+              whileHover={{ textShadow: isMobile ? "none" : "0 0 8px rgba(34, 211, 238, 0.8)" }}
             >
               Scroll down
             </motion.span>
@@ -206,7 +245,7 @@ const HeroSection = () => {
               height="24" 
               viewBox="0 0 24 24" 
               fill="none"
-              whileHover={{ scale: 1.2 }}
+              whileHover={{ scale: isMobile ? 1 : 1.2 }}
             >
               <path 
                 d="M7 10L12 15L17 10" 
@@ -219,14 +258,14 @@ const HeroSection = () => {
           </motion.div>
         )}
 
-        {/* Back to Top Button (icon only) */}
+        {/* Back to Top Button */}
         {showButton && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
             className="fixed bottom-6 right-6 z-40"
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: isMobile ? 1 : 1.1 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
             <MagneticButton>
@@ -234,8 +273,8 @@ const HeroSection = () => {
                 onClick={scrollToTop}
                 className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white p-3 rounded-full"
                 whileHover={{
-                  boxShadow: "0 0 20px rgba(34, 211, 238, 0.8)",
-                  scale: 1.1,
+                  boxShadow: isMobile ? "none" : "0 0 20px rgba(34, 211, 238, 0.8)",
+                  scale: isMobile ? 1 : 1.1,
                   transition: { duration: 0.3 }
                 }}
                 whileTap={{ scale: 0.9 }}
