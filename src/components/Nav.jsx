@@ -24,7 +24,7 @@ export const Nav = () => {
     }`}>
       {/* Desktop Navigation */}
       <div className="flex justify-between items-center py-2">
-        <img src="/images/logo1.png" alt="Logo" className="h-20" />
+        <img src="/images/logo1.png" alt="Logo" className="h-10" />
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-8 text-white">
