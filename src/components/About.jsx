@@ -190,46 +190,36 @@ const AboutMeModern = () => {
               </motion.div>
               
               {/* Profile Photo - Mobile First (shown above content on small screens) */}
-            {/* Profile Photo - Mobile First (shown above content on small screens) */}
-<motion.div
-  className="lg:hidden flex justify-center"
-  initial={{ opacity: 0, scale: 0.9 }}
-  animate={{ opacity: 1, scale: 1 }}
-  transition={{ delay: 0.3 }}
->
-  <Tilt
-    tiltMaxAngleX={5}
-    tiltMaxAngleY={5}
-    scale={1.02}
-    transitionSpeed={1000}
-    className="relative w-full max-w-xs rounded-2xl overflow-hidden border-2 border-cyan-400/30 shadow-lg shadow-cyan-400/20"
-  >
-    <motion.img
-      src={ProfileImage}
-      alt="Profile"
-      className="w-full h-auto object-contain"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.4 }}
-      onLoad={() => setImageLoaded(true)}
-    />
-    <motion.div
-      className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-900/50"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.5 }}
-    />
-    <motion.div
-      className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.6 }}
-    >
-      <h3 className="text-xl font-bold text-white">Dani Ramdani</h3>
-      <p className="text-cyan-400">Full-Stack Developer</p>
-    </motion.div>
-  </Tilt>
-</motion.div>
+              <motion.div
+                className="lg:hidden flex justify-center"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <Tilt
+                  tiltMaxAngleX={5}
+                  tiltMaxAngleY={5}
+                  scale={1.02}
+                  transitionSpeed={1000}
+                  className="relative w-64 h-[70vh] rounded-2xl overflow-hidden border-2 border-cyan-400/30 shadow-lg shadow-cyan-400/20"
+                >
+                  <motion.img
+                    src={ProfileImage}
+                    alt="Profile"
+                    className="w-full h-[70vh] "
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                    onLoad={() => setImageLoaded(true)}
+                  />
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-b from-transparent to-neutral-900/50"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.5 }}
+                  />
+                </Tilt>
+              </motion.div>
               
               <motion.div
                 initial="hidden"
