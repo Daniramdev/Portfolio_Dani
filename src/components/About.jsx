@@ -184,7 +184,9 @@ const AboutMeModern = () => {
                     duration: 3
                   }}
                 >
-                  <span className="text-xs font-bold text-white">DR</span>
+                  <span className="text-xs font-bold text-white">
+                     <img src="/images/logo.png" alt="Logo" className="h-4" />
+                  </span>
                 </motion.div>
                 <span className="text-sm font-medium text-neutral-400">DEVELOPER PROFILE</span>
               </motion.div>
