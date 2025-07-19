@@ -23,8 +23,8 @@ export const Nav = () => {
     <nav className={`fixed w-full text-2xl md:text-sm font-bold px-4 md:px-20 z-50 transition-all duration-300  'bg-white backdrop-blur-md' : 'bg-transparent'
     }`}>
       {/* Desktop Navigation */}
-      <div className="flex justify-between items-center py-2">
-        <img src="/images/Logow.png" alt="Logo" className="h-20" />
+      <div className="flex justify-between items-center  py-2">
+       <img src="/images/logodr.png" alt="Logo" className="h-16 rounded-2xl" />
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex gap-8 text-white">
