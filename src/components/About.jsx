@@ -201,12 +201,12 @@ const AboutMeModern = () => {
                   tiltMaxAngleY={5}
                   scale={1.02}
                   transitionSpeed={1000}
-                  className="relative w-64 h-[70vh] rounded-2xl overflow-hidden border-2 border-cyan-400/30 shadow-lg shadow-cyan-400/20"
+                  className="relative  h-[43vh] rounded-2xl items-center flex justify-center overflow-hidden border-2 border-cyan-400/30 shadow-lg shadow-cyan-400/20"
                 >
                   <motion.img
                     src={ProfileImage}
                     alt="Profile"
-                    className="w-full h-[70vh] "
+                    className=" h-[100%] "
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.4 }}

@@ -8,7 +8,7 @@ import RoundedButton from "./RoundedButton";
 const Blob = ({ color = "", emissive = "", position = [0, 0, 0], scale = 1 }) => {
   return (
     <mesh position={position} scale={[scale, scale, scale]}>
-      <sphereGeometry args={[1, 128, 128]} /> {/* Meningkatkan detail geometri */}
+      <sphereGeometry args={[1,128, 128]} /> {/* Meningkatkan detail geometri */}
       <MeshDistortMaterial
         color={color}
         emissive={emissive}
@@ -117,7 +117,7 @@ const HeroSection = () => {
   
   <Blob 
     position={[0, 0, 0]} 
-    scale={isMobile ? 1.5 : 2.0} // Lebih besar
+    scale={isMobile ? 1.6 : 1.8} // Lebih besar
     color="#3b82f6"
     emissive="#22d3ee"
   />
@@ -147,7 +147,7 @@ const HeroSection = () => {
             onHoverEnd={() => !isMobile && setHoverStates({...hoverStates, title: false})}
           >
             <motion.h1
-              className="text-4xl md:text-6xl lg:text-8xl font-bold mb-4 text-white tracking-tighter px-4 text-center"
+              className="text-6xl md:text-8xl  font-bold mb-4 text-white tracking-tighter px-4 text-center"
               style={{ 
                 fontWeight: 700,
                 letterSpacing: '-0.05em',
@@ -189,7 +189,7 @@ const HeroSection = () => {
               transition: { duration: 0.3 }
             }}
           >
-            Fullstack Web Developer | Python & React Specialist
+             Web Developer | Python & React Specialist
           </motion.p>
 
           <motion.div
