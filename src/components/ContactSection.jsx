@@ -222,7 +222,7 @@ const ContactSection = () => {
           viewport={{ once: true }}
         >  
         <div className='items-center grap-3 justify-center flex gap-3'>
-        <img src="/images/logo.png" alt="Logo" className="md:h-20 h-10" />
+        <img src="/images/Logo.svg" alt="Logo" className="md:h-30 h-20" />
           <p className="text-transparent font-bold bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400 md:text-8xl text-5xl">
           Dani Ramdani
           </p>

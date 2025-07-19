@@ -180,7 +180,7 @@ const AboutMeModern = () => {
                   }}
                 >
                   <span className="text-xs font-bold text-white">
-                     <img src="/images/logo.png" alt="Logo" className="h-4" />
+                     <img src="/images/Logo.svg" alt="Logo" className="h-8" />
                   </span>
                 </motion.div>
                 <span className="text-sm font-medium text-neutral-400">DEVELOPER PROFILE</span>
