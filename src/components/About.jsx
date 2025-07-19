@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { motion, useInView, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import { FaPython, FaReact, FaPhp, FaLaravel, FaArrowUp } from "react-icons/fa";
 import { SiFlask, SiCodeigniter, SiTailwindcss, SiMysql, SiPostgresql } from "react-icons/si";
@@ -9,18 +9,13 @@ import ProfileImage from "/bg.png";
 
 const AboutMeModern = () => {
   const containerRef = useRef(null);
-  const topRef = useRef(null);
   const isInView = useInView(containerRef, { margin: "-100px", once: false });
   const [showScrollButton, setShowScrollButton] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [setImageLoaded] = useState(false);
   
   // Scroll progress animation
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
+ 
   
-  const y = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
   
   // Check scroll position for button visibility
   useEffect(() => {
@@ -149,7 +144,7 @@ const AboutMeModern = () => {
       {/* Floating background elements */}
       <motion.div 
         className="absolute inset-0 overflow-hidden"
-        style={{ y }}
+       
       >
         <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-cyan-500/10 blur-3xl"></div>
         <div className="absolute bottom-1/3 right-1/3 w-96 h-96 rounded-full bg-emerald-500/10 blur-3xl"></div>
@@ -434,7 +429,7 @@ const AboutMeModern = () => {
                             animate={{ opacity: 1 }}
                             transition={{ delay: 0.8 + i * 0.15 + hi * 0.1 }}
                           >
-                            {highlight.split(/(?=\<span)/).map((part, pi) => {
+                            {highlight.split(/(?=<span)/).map((part, pi) => {
                               if (exp.tech.some(tech => part.includes(tech))) {
                                 const tech = exp.tech.find(t => part.includes(t));
                                 const colors = {
