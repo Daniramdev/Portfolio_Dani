@@ -252,7 +252,7 @@ const AboutMeModern = () => {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
                 >
-                  Python & React Specialist | Database Optimization | Scalable Solutions
+                  Web Developer| Database Optimization | Scalable Solutions
                 </motion.p>
               </motion.div>
               
