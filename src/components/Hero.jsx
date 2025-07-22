@@ -189,7 +189,7 @@ const HeroSection = () => {
               transition: { duration: 0.3 }
             }}
           >
-             Web Developer | Python & React Specialist
+             Web Developer 
           </motion.p>
 
           <motion.div

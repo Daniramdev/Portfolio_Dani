@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio | UI/UX & Fullstack Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;700&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/gsap@3/dist/ScrollToPlugin.min.js"></script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: 'Sora', sans-serif;
+        background: #0a0a0a;
+        color: #ffffff;
+        perspective: 1000px;
+      }
+      .glass-card {
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transform-style: preserve-3d;
+        transition: transform 0.2s ease;
+      }
+      .tilt {
+        transform: rotateY(10deg) rotateX(5deg);
+      }
+      h1, h2, h3 {
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      h1 {
+        font-size: 4rem;
+      }
+      h2 {
+        font-size: 3rem;
+      }
+      h3 {
+        font-size: 1.75rem;
+      }
+      video, img {
+        border-radius: 1rem;
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body class="overflow-x-hidden">
+    <!-- Hero Section -->
+    <section id="hero" class="h-screen flex flex-col justify-center items-center text-center px-4">
+      <img src="/images/profile.svg" alt="Profile" class="w-40 h-40 rounded-full mb-6 shadow-lg" />
+      <h1 class="font-extrabold leading-tight tracking-wide animate-pulse">Designing Futures,<br/>Building Webs</h1>
+      <div class="space-x-4 mt-6">
+        <a href="#contact" class="px-8 py-3 text-lg bg-blue-500 hover:bg-blue-700 rounded-lg shadow-md">Hire Me</a>
+        <a href="/cv.pdf" class="px-8 py-3 text-lg border border-white hover:bg-white hover:text-black rounded-lg">Download CV</a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="min-h-screen px-6 py-24 bg-black text-white">
+      <div class="max-w-5xl mx-auto">
+        <h2 class="font-bold mb-6">About Me</h2>
+        <p class="mb-10 text-2xl leading-relaxed">I'm a Master UI/UX Designer and Fullstack Developer, crafting beautiful and functional digital experiences. Passionate about solving real problems with clean design and scalable code.</p>
+        <video autoplay muted loop>
+          <source src="/videos/about.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+          <div class="glass-card p-6 rounded-xl tilt text-xl font-medium">Figma, Adobe XD, Photoshop</div>
+          <div class="glass-card p-6 rounded-xl tilt text-xl font-medium">HTML, CSS, JavaScript, React, Node.js</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="min-h-screen px-6 py-24 bg-gradient-to-b from-black to-gray-900">
+      <div class="max-w-5xl mx-auto text-white">
+        <h2 class="font-bold mb-10">Skills</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-xl font-semibold">
+          <div class="glass-card p-6 rounded-xl text-center tilt">Figma</div>
+          <div class="glass-card p-6 rounded-xl text-center tilt">Adobe XD</div>
+          <div class="glass-card p-6 rounded-xl text-center tilt">HTML</div>
+          <div class="glass-card p-6 rounded-xl text-center tilt">CSS</div>
+          <div class="glass-card p-6 rounded-xl text-center tilt">JavaScript</div>
+          <div class="glass-card p-6 rounded-xl text-center tilt">React</div>
+          <div class="glass-card p-6 rounded-xl text-center tilt">Node.js</div>
+          <div class="glass-card p-6 rounded-xl text-center tilt">MongoDB</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="min-h-screen px-6 py-24 bg-black text-white">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="font-bold mb-12">Projects</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="glass-card p-6 rounded-xl hover:scale-105 transition-transform duration-300 tilt">
+            <video autoplay loop muted class="mb-4"><source src="/videos/project-a.mp4" type="video/mp4"></video>
+            <h3 class="font-semibold mb-2">Project A</h3>
+            <p class="text-lg">Modern SaaS dashboard with dynamic charts, animations, and full CMS integration.</p>
+          </div>
+          <div class="glass-card p-6 rounded-xl hover:scale-105 transition-transform duration-300 tilt">
+            <video autoplay loop muted class="mb-4"><source src="/videos/project-b.mp4" type="video/mp4"></video>
+            <h3 class="font-semibold mb-2">Project B</h3>
+            <p class="text-lg">Mobile-first eCommerce site with UX-focused checkout flow and API integration.</p>
+          </div>
+          <div class="glass-card p-6 rounded-xl hover:scale-105 transition-transform duration-300 tilt">
+            <video autoplay loop muted class="mb-4"><source src="/videos/project-c.mp4" type="video/mp4"></video>
+            <h3 class="font-semibold mb-2">Project C</h3>
+            <p class="text-lg">Interactive portfolio template with GSAP, 3D effects, and dark/light theme toggle.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="min-h-[50vh] px-6 py-24 bg-gradient-to-b from-black to-gray-800 text-white">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="font-bold mb-10">Testimonials</h2>
+        <blockquote class="italic text-2xl">"Working with Dani was incredible. His design intuition and development skills exceeded our expectations." – Client A</blockquote>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="min-h-screen px-6 py-24 bg-black text-white">
+      <div class="max-w-4xl mx-auto">
+        <h2 class="font-bold mb-8">Contact</h2>
+        <form class="space-y-6">
+          <input type="text" placeholder="Your Name" class="w-full p-4 rounded-md bg-gray-800 text-white text-lg" />
+          <input type="email" placeholder="Your Email" class="w-full p-4 rounded-md bg-gray-800 text-white text-lg" />
+          <textarea rows="5" placeholder="Message" class="w-full p-4 rounded-md bg-gray-800 text-white text-lg"></textarea>
+          <button type="submit" class="px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-md text-xl">Send Message</button>
+        </form>
+        <div class="mt-8 flex justify-center space-x-6 text-2xl">
+          <a href="#" class="text-blue-400 hover:underline">LinkedIn</a>
+          <a href="#" class="text-pink-400 hover:underline">Instagram</a>
+          <a href="#" class="text-white hover:underline">GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.from("#hero h1", {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: "#hero",
+          start: "top 80%",
+        },
+      });
+
+      gsap.utils.toArray("section").forEach((section) => {
+        gsap.from(section, {
+          y: 100,
+          opacity: 0,
+          duration: 1.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+        });
+      });
+
+      document.querySelectorAll(".tilt").forEach((el) => {
+        el.addEventListener("mousemove", (e) => {
+          const { width, height, left, top } = el.getBoundingClientRect();
+          const x = e.clientX - left;
+          const y = e.clientY - top;
+          const rotateX = ((y / height) - 0.5) * 20;
+          const rotateY = ((x / width) - 0.5) * 20;
+          el.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+        el.addEventListener("mouseleave", () => {
+          el.style.transform = "rotateX(0deg) rotateY(0deg)";
+        });
+      });
+    </script>
+  </body>
+</html>
